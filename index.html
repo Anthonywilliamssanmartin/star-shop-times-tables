@@ -171,11 +171,28 @@
   .pets-head { color: #fff; font-weight: 800; font-size: 18px; margin: 4px 0 10px; text-shadow: 0 2px 0 rgba(0,0,0,0.18); }
 
   /* Concert scene */
-  .scene-wrap { position: relative; width: 100%; max-width: 560px; margin: 0 auto 14px; height: 0; padding-bottom: 75%; border-radius: 22px; overflow: hidden; box-shadow: 0 7px 0 rgba(0,0,0,0.18); background: #0a0420; }
+  .scene-wrap { position: relative; width: 100%; max-width: 560px; margin: 0 auto 14px; height: 0; padding-bottom: 78%; border-radius: 22px; overflow: hidden; box-shadow: 0 7px 0 rgba(0,0,0,0.18); background: #0a0420; }
   .scene-bg { position: absolute; left: 0; top: 0; right: 0; bottom: 0; }
   .scene-bg svg { width: 100%; height: 100%; display: block; }
-  .scene-avatar { position: absolute; left: 50%; bottom: 7%; transform: translateX(-50%); width: 37%; }
-  .scene-avatar svg { width: 100%; height: auto; display: block; }
+  .scene-avatar { position: absolute; left: 50%; bottom: 7%; width: 37%; transform: translateX(-50%); z-index: 5; animation: s-bob 2.6s ease-in-out infinite; }
+  .scene-avatar svg { width: 100%; height: auto; display: block; position: relative; z-index: 1; }
+  .ava-glow { position: absolute; left: 50%; top: 24%; width: 150%; height: 82%; transform: translateX(-50%); background: radial-gradient(circle, rgba(255,233,138,0.7), rgba(255,233,138,0)); z-index: 0; animation: s-glow 2s ease-in-out infinite; }
+  .beam { position: absolute; top: -8%; width: 16%; height: 86%; background: linear-gradient(to bottom, rgba(255,255,255,0.35), rgba(255,255,255,0)); transform-origin: top center; pointer-events: none; z-index: 2; }
+  .beamL { left: 24%; animation: s-sweepL 3.2s ease-in-out infinite alternate; }
+  .beamR { left: 60%; animation: s-sweepR 3.7s ease-in-out infinite alternate; }
+  .confetti { position: absolute; top: -8%; width: 8px; height: 12px; border-radius: 2px; z-index: 4; animation: s-fall linear infinite; }
+  .firework { position: absolute; width: 78px; height: 78px; border-radius: 50%; transform: scale(0); opacity: 0; z-index: 3; pointer-events: none; animation: s-boom 2.4s ease-out infinite; }
+  .marquee { position: absolute; top: 5%; left: 0; right: 0; text-align: center; z-index: 6; }
+  .marquee .nm { display: inline-block; font-weight: 900; font-size: 26px; letter-spacing: 2px; color: #fff; animation: s-neon 1.4s ease-in-out infinite alternate; }
+  .spark { position: absolute; font-size: 18px; z-index: 6; pointer-events: none; animation: s-twinkle 1.6s ease-in-out infinite; }
+  @keyframes s-bob { 0%,100%{ transform: translate(-50%,0);} 50%{ transform: translate(-50%,-8px);} }
+  @keyframes s-glow { 0%,100%{ opacity:0.45; } 50%{ opacity:0.9; } }
+  @keyframes s-sweepL { from{ transform: rotate(-20deg);} to{ transform: rotate(12deg);} }
+  @keyframes s-sweepR { from{ transform: rotate(16deg);} to{ transform: rotate(-14deg);} }
+  @keyframes s-fall { 0%{ transform: translateY(-20px) rotate(0); opacity:0;} 10%{opacity:1;} 100%{ transform: translateY(520px) rotate(560deg); opacity:0.9;} }
+  @keyframes s-boom { 0%{ transform: scale(0); opacity:0;} 12%{ opacity:1;} 60%{ transform: scale(1.5); opacity:0.85;} 100%{ transform: scale(2); opacity:0;} }
+  @keyframes s-neon { from{ opacity:0.85; text-shadow:0 0 6px #ff5fa2,0 0 12px #ff5fa2;} to{ opacity:1; text-shadow:0 0 10px #ffe98a,0 0 22px #ff5fa2,0 0 34px #9b5de5;} }
+  @keyframes s-twinkle { 0%,100%{ opacity:0.2; transform: scale(0.7);} 50%{ opacity:1; transform: scale(1.2);} }
 
   /* Freeze event */
   #freeze { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 100; background: linear-gradient(160deg, #bfe9ff 0%, #7fb8e6 60%, #5a8fd6 100%); overflow-y: auto; padding: 16px; }
@@ -341,10 +358,7 @@
   <!-- CONCERT SCENE -->
   <div class="screen" id="s-scene">
     <h1 id="sceneTitle">🎤 LIVE!</h1>
-    <div class="scene-wrap">
-      <div class="scene-bg" id="sceneBg"></div>
-      <div class="scene-avatar" id="sceneAvatar"></div>
-    </div>
+    <div class="scene-wrap" id="sceneWrap"></div>
     <p class="sub" id="sceneCaption">You're headlining your own show!</p>
     <button class="btn b-back" data-go="coll">⬅ Back</button>
   </div>
@@ -662,9 +676,24 @@
     s+='</svg>';
     return s;
   }
+  function buildSceneHTML(item){
+    var big = item.scene==="headline";
+    var html='<div class="scene-bg">'+sceneSVG()+'</div>';
+    html+='<div class="beam beamL"></div><div class="beam beamR"></div>';
+    var cols=['#ff5fa2','#ffd23f','#3aa3ff','#2ee6a8','#9b5de5','#ff8c42','#ffffff'];
+    var n = big?22:13;
+    for(var i=0;i<n;i++){ var left=(5+i*4.3)%95; var dur=(2.6+(i%5)*0.45); var del=((i%7)*0.4).toFixed(2); html+='<div class="confetti" style="left:'+left+'%;background:'+cols[i%cols.length]+';animation-duration:'+dur+'s;animation-delay:'+del+'s;"></div>'; }
+    var fw = big?[[22,22,'#ffd23f',0],[76,16,'#ff5fa2',0.6],[50,9,'#3aa3ff',1.2]]:(item.scene==="backstage"?[[30,18,'#ffe98a',0.2],[70,22,'#ff5fa2',1.0]]:[[68,18,'#ff5fa2',0.4]]);
+    for(var k=0;k<fw.length;k++){ html+='<div class="firework" style="left:'+fw[k][0]+'%;top:'+fw[k][1]+'%;background:radial-gradient(circle,#fff 0%,'+fw[k][2]+' 35%,transparent 70%);animation-delay:'+fw[k][3]+'s;"></div>'; }
+    var label = big?("★ "+P.name.toUpperCase()+" ★"):(item.scene==="backstage"?"★ VIP ★":"★ LIVE ★");
+    html+='<div class="marquee"><div class="nm">'+label+'</div></div>';
+    html+='<div class="scene-avatar"><div class="ava-glow"></div>'+avatarSVG(P.avatar)+'</div>';
+    var sp=[[24,52],[72,50],[32,70],[66,68],[50,44],[44,80]];
+    for(var j=0;j<sp.length;j++){ html+='<div class="spark" style="left:'+sp[j][0]+'%;top:'+sp[j][1]+'%;animation-delay:'+(j*0.3)+'s;">✨</div>'; }
+    return html;
+  }
   function openScene(item){
-    $("sceneBg").innerHTML=sceneSVG();
-    $("sceneAvatar").innerHTML=avatarSVG(P.avatar);
+    $("sceneWrap").innerHTML=buildSceneHTML(item);
     var nm=P.name;
     if(item.scene==="ticket"){ $("sceneTitle").textContent="🎫 "+nm+" at the concert!"; $("sceneCaption").textContent="You're at the show — sing along! 🎶"; }
     else if(item.scene==="backstage"){ $("sceneTitle").textContent="🌟 "+nm+" backstage!"; $("sceneCaption").textContent="VIP backstage pass — meet the stars! 💫"; }
