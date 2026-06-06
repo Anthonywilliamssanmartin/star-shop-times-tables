@@ -480,7 +480,7 @@
     mouth:     [{id:"smile",label:"Smile"},{id:"grin",label:"Big grin"},{id:"small",label:"Cute"}],
     hair:      [{id:"short",label:"Short"},{id:"long",label:"Long"},{id:"none",label:"None"},{id:"bunches",label:"Bunches",price:12},{id:"ponytail",label:"Ponytail",price:12},{id:"curly",label:"Curly",price:15}],
     hairColor: [{id:"brown"},{id:"black"},{id:"blonde"},{id:"ginger"},{id:"pink"},{id:"purple"},{id:"blue"},{id:"white"}],
-    top:       [{id:"tshirt",label:"T-shirt"},{id:"striped",label:"Stripes"},{id:"dress",label:"Dress",price:18},{id:"stage",label:"Stage outfit",price:45}],
+    top:       [{id:"tshirt",label:"T-shirt"},{id:"striped",label:"Stripes"},{id:"dress",label:"Dress",price:18},{id:"stage",label:"Stage outfit",price:45},{id:"dr_rose",label:"Rosegold",shopId:"dr_rose"},{id:"dr_mer",label:"Mermaid",shopId:"dr_mer"},{id:"dr_prin",label:"Princess",shopId:"dr_prin"},{id:"dr_star",label:"Starlight",shopId:"dr_star"},{id:"dr_swan",label:"Swan tutu",shopId:"dr_swan"},{id:"dr_dia",label:"Diamond",shopId:"dr_dia"}],
     topColor:  [{id:"pink"},{id:"purple"},{id:"blue"},{id:"teal"},{id:"yellow"},{id:"red"}],
     hat:       [{id:"none",label:"None"},{id:"party",label:"Party hat",price:12},{id:"witch",label:"Witch hat",price:16},{id:"crown",label:"Crown",price:40}],
     glasses:   [{id:"none",label:"None"},{id:"round",label:"Round",price:12},{id:"sun",label:"Sunnies",price:18}],
@@ -517,7 +517,17 @@
     if(style==="curly"){ var b=""; for(var x=38;x<=162;x+=22){ b+='<circle cx="'+x+'" cy="42" r="20" fill="'+c+'"/>'; } return b+cap; }
     return cap;
   }
+  function dressSvg(id){
+    if(id==="dr_rose") return '<path d="M62 158 Q100 150 138 158 L168 220 Q100 230 32 220 Z" fill="#e7a78f"/><path d="M62 158 Q100 150 138 158 L141 178 Q100 186 59 178 Z" fill="#d98f7a"/><path d="M59 178 Q100 186 141 178 L148 194 Q100 200 52 194 Z" fill="#f6cabb"/>';
+    if(id==="dr_prin") return '<path d="M66 158 Q100 152 134 158 L186 220 Q100 234 14 220 Z" fill="#ff9ed6"/><path d="M66 158 Q100 152 134 158 L138 180 Q100 188 62 180 Z" fill="#e86fb0"/><g fill="#fff" opacity="0.85"><circle cx="72" cy="206" r="3"/><circle cx="100" cy="214" r="3"/><circle cx="128" cy="206" r="3"/></g>';
+    if(id==="dr_mer"){ var s='<path d="M70 158 Q100 152 130 158 L118 198 Q150 224 100 226 Q50 224 82 198 Z" fill="#2ec4b6"/><g fill="none" stroke="#1f9e93" stroke-width="2">'; for(var y=170;y<=194;y+=8){ s+='<path d="M74 '+y+' Q100 '+(y+6)+' 126 '+y+'"/>'; } return s+'</g>'; }
+    if(id==="dr_star"){ var d='<path d="M62 158 Q100 150 138 158 L170 220 Q100 230 30 220 Z" fill="#3a2a6e"/><g fill="#ffe98a">'; var pts=[[80,180],[120,178],[100,198],[72,210],[128,208],[96,216]]; for(var i=0;i<pts.length;i++){ d+='<path d="M'+pts[i][0]+' '+(pts[i][1]-4)+' l1.6 3 3 1 -3 1 -1.6 3 -1.6 -3 -3 -1 3 -1 z"/>'; } return d+'</g>'; }
+    if(id==="dr_swan") return '<path d="M70 158 Q100 152 130 158 L132 184 Q100 190 68 184 Z" fill="#f3f4ff"/><path d="M38 186 Q100 174 162 186 Q150 216 100 218 Q50 216 38 186 Z" fill="#ffffff"/><path d="M44 188 Q72 198 100 194 Q128 198 156 188" fill="none" stroke="#dbe3ff" stroke-width="2"/>';
+    if(id==="dr_dia"){ var g='<path d="M62 158 Q100 150 138 158 L172 220 Q100 232 28 220 Z" fill="#ffcf57"/><path d="M62 158 Q100 150 138 158 L142 180 Q100 188 58 180 Z" fill="#e8a800"/><g fill="#bfe9ff" stroke="#7ad0ff" stroke-width="1">'; var gp=[[100,198],[78,208],[122,208]]; for(var k=0;k<gp.length;k++){ g+='<path d="M'+gp[k][0]+' '+(gp[k][1]-5)+' l5 5 -5 5 -5 -5 z"/>'; } return g+'</g>'; }
+    return '';
+  }
   function topShape(style,c){
+    if(style.indexOf("dr_")===0) return dressSvg(style);
     if(style==="dress") return '<path d="M40 220 Q36 168 100 156 Q164 168 160 220 Z" fill="'+c+'"/>';
     var base = '<path d="M50 220 Q48 166 100 156 Q152 166 150 220 Z" fill="'+c+'"/>';
     if(style==="striped") return base + '<path d="M50 220 Q48 166 100 156 Q152 166 150 220 Z" fill="url(#stripe)"/>';
@@ -613,6 +623,7 @@
     return s;
   }
   function petCountOfType(type){ var n=0; for(var i=0;i<P.pets.length;i++){ if(P.pets[i].type===type) n++; } return n; }
+  function catItem(id){ for(var i=0;i<CATALOGUE.length;i++){ if(CATALOGUE[i].id===id) return CATALOGUE[i]; } return null; }
 
   // ================= Question generation =================
   function favouriteNames(){ return [P?P.name:"Star","Taylor","Mirabelle","Isadora","Mallory","Rumi"]; }
@@ -827,7 +838,9 @@
     var sw=$("dressSwatches"); sw.innerHTML=""; var opts=OPTIONS[editTab];
     for(var j=0;j<opts.length;j++){
       (function(opt){
-        var owned = !opt.price || P.avatarOwned[editTab+":"+opt.id];
+        var price = opt.price, owned;
+        if(opt.shopId){ var ci=catItem(opt.shopId); price = ci?ci.price:0; owned = (P.owned[opt.shopId]||0)>0; }
+        else { owned = !opt.price || P.avatarOwned[editTab+":"+opt.id]; }
         var selected = P.avatar[editTab]===opt.id;
         var b=document.createElement("button"); b.className="swatch"+(selected?" sel":"");
         var inner="";
@@ -837,14 +850,18 @@
         } else {
           inner+='<div style="font-size:15px;min-height:24px;">'+(opt.label||opt.id)+'</div>';
         }
-        if(!owned) inner+='<span class="lock">🔒 🪙'+opt.price+'</span>';
-        else if(opt.price) inner+='<span class="lock free">Owned</span>';
+        if(!owned) inner+='<span class="lock">🔒 🪙'+price+'</span>';
+        else if(opt.price||opt.shopId) inner+='<span class="lock free">Owned</span>';
         else inner+='<span class="lock free">&nbsp;</span>';
         b.innerHTML=inner; b.onclick=function(){ selectPart(editTab,opt,tabDef); }; sw.appendChild(b);
       })(opts[j]);
     }
   }
   function selectPart(slot,opt,tabDef){
+    if(opt.shopId){
+      if((P.owned[opt.shopId]||0)<=0){ toast("Buy this dress in the Shop first! 👗"); var it=catItem(opt.shopId); if(it) openDetail(it); return; }
+      P.avatar[slot]=opt.id; saveStore(); renderDress(); return;
+    }
     var owned = !opt.price || P.avatarOwned[slot+":"+opt.id];
     if(!owned){
       if(P.coins<opt.price){ toast("Keep earning — you need 🪙"+(opt.price-P.coins)+" more!"); return; }
