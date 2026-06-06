@@ -157,7 +157,32 @@
   .player-btn .pcoins { font-size: 15px; font-weight: 700; opacity: 0.95; }
   .nameinput { width: 100%; font-family: inherit; font-size: 22px; font-weight: 800; text-align: center; padding: 16px; border-radius: 18px; border: 3px solid #fff; color: #3a2168; margin-bottom: 14px; -webkit-user-select: text; user-select: text; }
 
-  .pop { position: fixed; left: 50%; top: 40%; transform: translateX(-50%); font-size: 40px; font-weight: 900; color: #ffd54a; text-shadow: 0 2px 6px rgba(0,0,0,0.4); pointer-events: none; z-index: 50; animation: floatup 1s ease-out forwards; }
+  .b-pets { background: #ff8fc0; }
+
+  /* Pets */
+  .pets-grid { display: flex; flex-wrap: wrap; justify-content: flex-start; }
+  .petitem { width: 33.33%; text-align: center; margin-bottom: 14px; cursor: pointer; }
+  .petitem:active { transform: translateY(2px); }
+  .petpic { width: 96px; height: 96px; margin: 0 auto; }
+  .petpic svg { width: 100%; height: 100%; display: block; }
+  .petname { color: #fff; font-weight: 800; font-size: 14px; margin-top: 2px; text-shadow: 0 2px 0 rgba(0,0,0,0.15); }
+  .bigpet { width: 190px; height: 190px; margin: 0 auto; }
+  .bigpet svg { width: 100%; height: 100%; display: block; }
+  .pets-head { color: #fff; font-weight: 800; font-size: 18px; margin: 4px 0 10px; text-shadow: 0 2px 0 rgba(0,0,0,0.18); }
+
+  /* Freeze event */
+  #freeze { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 100; background: linear-gradient(160deg, #bfe9ff 0%, #7fb8e6 60%, #5a8fd6 100%); overflow-y: auto; padding: 16px; }
+  #freeze.on { display: block; }
+  .freezecard { max-width: 600px; margin: 10px auto; background: rgba(255,255,255,0.96); border-radius: 26px; padding: 20px; box-shadow: 0 8px 0 rgba(0,0,0,0.18); border: 4px solid #aee0ff; }
+  .freezehead { text-align: center; font-size: 56px; }
+  .freezeTitle { text-align: center; color: #1f6fb0; font-size: 24px; margin: 4px 0; }
+  .freezeSub { text-align: center; color: #3a2168; font-weight: 700; font-size: 18px; margin: 4px 0 12px; }
+  .icebar { text-align: center; font-size: 20px; line-height: 1.6; margin-bottom: 12px; }
+  .icebar .ice { display: inline-block; margin: 0 1px; }
+  .icebar .ice.melted { opacity: 0.18; }
+  .freezeq { text-align: center; font-size: 38px; font-weight: 800; color: #1f6fb0; margin: 8px 0 18px; }
+
+  .pop { position: fixed; left: 50%; top: 40%; transform: translateX(-50%); font-size: 40px; font-weight: 900; color: #ffd54a; text-shadow: 0 2px 6px rgba(0,0,0,0.4); pointer-events: none; z-index: 120; animation: floatup 1s ease-out forwards; }
   @keyframes floatup { 0%{opacity:0; transform:translate(-50%,10px) scale(0.6);} 20%{opacity:1;} 100%{opacity:0; transform:translate(-50%,-70px) scale(1.3);} }
   .toast { position: fixed; left: 50%; bottom: 30px; transform: translateX(-50%); background: rgba(0,0,0,0.82); color: #fff; padding: 12px 22px; border-radius: 20px; font-weight: 700; z-index: 60; font-size: 17px; max-width: 90%; text-align: center; }
 </style>
@@ -189,6 +214,7 @@
     <p class="sub">Answer questions, earn coins, dress your star!</p>
     <button class="btn b-play" id="goPlay"><span class="em">🎤</span>Play &amp; Earn<small>Answer times tables to win coins</small></button>
     <button class="btn b-dress" id="goDress"><span class="em">🪞</span><span id="dressLabel">Dress My Star</span><small>Build your face &amp; buy hair, clothes &amp; more</small></button>
+    <button class="btn b-pets" id="goPets"><span class="em">🧸</span><span id="petsLabel">My Squish Pets</span><small>Name and dress your cute plushies</small></button>
     <button class="btn b-shop" id="goShop"><span class="em">🛍️</span><span id="shopLabel">The Shop</span><small>Spend your coins on goodies</small></button>
     <button class="btn b-coll" id="goColl"><span class="em">🏆</span><span id="collLabel">My Collection</span><small>See everything you've got</small></button>
   </div>
@@ -281,8 +307,28 @@
   <!-- COLLECTION -->
   <div class="screen" id="s-coll">
     <h1 id="collTitle">🏆 My Collection</h1>
+    <div id="collPets"></div>
     <div class="collgrid" id="collgrid"></div>
     <button class="btn b-back" data-go="home">⬅ Back</button>
+  </div>
+
+  <!-- MY SQUISH PETS -->
+  <div class="screen" id="s-pets">
+    <h1 id="petsTitle">🧸 My Squish Pets</h1>
+    <p class="sub" id="petsSub">Tap a pet to name &amp; dress it!</p>
+    <div class="pets-grid" id="petsGrid"></div>
+    <button class="btn b-back" data-go="home">⬅ Back</button>
+  </div>
+
+  <!-- ONE PET -->
+  <div class="screen" id="s-petdetail">
+    <h1>My pet</h1>
+    <div class="avatar-frame"><div class="bigpet" id="petBig"></div></div>
+    <input class="nameinput" id="petNameInput" type="text" placeholder="Name your pet" maxlength="14" autocomplete="off">
+    <button class="btn b-pay" id="petSaveName" style="text-align:center;padding:14px;font-size:18px;">💾 Save name</button>
+    <p class="note">Give your pet an accessory:</p>
+    <div class="swatches" id="petAccSwatches"></div>
+    <button class="btn b-back" data-go="pets">⬅ Back to pets</button>
   </div>
 
   <!-- SETTINGS -->
@@ -296,6 +342,18 @@
     <button class="btn b-back" data-go="home">⬅ Back</button>
   </div>
 
+</div>
+
+<!-- FREEZE EVENT -->
+<div id="freeze">
+  <div class="freezecard">
+    <div class="freezehead">🧙‍♀️ ❄️</div>
+    <h2 class="freezeTitle">The Wicked Witch froze the game!</h2>
+    <p class="freezeSub" id="freezeSub">Melt the ice — say the 4 times table!</p>
+    <div class="icebar" id="iceBar"></div>
+    <div class="freezeq" id="freezeQ">1 × 4 = ?</div>
+    <div class="opts" id="freezeOpts"></div>
+  </div>
 </div>
 
 <script>
@@ -320,7 +378,7 @@
     return {
       name: name, coins: 0, owned: {}, tables: [2,3,4,5,10,11],
       avatar: { skin:"s1", eyes:"round", mouth:"smile", hair:"short", hairColor:"brown", top:"tshirt", topColor:"pink", hat:"none", glasses:"none", acc:"none" },
-      avatarOwned: {}
+      avatarOwned: {}, pets: [], petAccOwned: {}
     };
   }
 
@@ -328,6 +386,8 @@
   var CATS = [
     { key:"beauty",  name:"💄 Makeup & Beauty" },
     { key:"fashion", name:"👗 Fashion" },
+    { key:"dresses", name:"👑 Dream Dresses" },
+    { key:"squish",  name:"🧸 Squish Pets" },
     { key:"popstar", name:"🎤 Pop Star" },
     { key:"magic",   name:"🔮 Magic" },
     { key:"treats",  name:"🍩 Treats & Days Out" }
@@ -358,7 +418,43 @@
     { id:"sushi",    cat:"treats",  pic:"🍣", name:"Sushi meal",           price:25,  bg:"linear-gradient(145deg,#ffd0b0,#ff8a5c)", desc:"A yummy sushi feast — your favourite!" },
     { id:"dance",    cat:"treats",  pic:"🩰", name:"Dance studio visit",   price:40,  bg:"linear-gradient(145deg,#ffc0e0,#d96aa0)", desc:"A fun trip to the dance studio." },
     { id:"gym",      cat:"treats",  pic:"🤸", name:"Gym visit",            price:40,  bg:"linear-gradient(145deg,#aef0c0,#34b37a)", desc:"A bouncy day out at the gym." },
-    { id:"phone",    cat:"treats",  pic:"📱", name:"Mobile phone",         price:120, bg:"linear-gradient(145deg,#bdbfff,#6a5acd)", desc:"Your very own mobile phone — a huge prize!" }
+    { id:"phone",    cat:"treats",  pic:"📱", name:"Mobile phone",         price:120, bg:"linear-gradient(145deg,#bdbfff,#6a5acd)", desc:"Your very own mobile phone — a huge prize!" },
+
+    // --- Dream Dresses (expensive collectibles) ---
+    { id:"dr_rose",  cat:"dresses", pic:"👗", name:"Rosegold gown",        price:70,  bg:"linear-gradient(145deg,#ffd6c0,#ff9aa8)", desc:"A shimmering rosegold gown for special days." },
+    { id:"dr_mer",   cat:"dresses", pic:"🧜‍♀️", name:"Mermaid dress",        price:110, bg:"linear-gradient(145deg,#8fe8e0,#3aa0ff)", desc:"A sparkly mermaid dress with a swishy tail." },
+    { id:"dr_prin",  cat:"dresses", pic:"👸", name:"Princess ballgown",    price:150, bg:"linear-gradient(145deg,#ffc0e0,#c06ab3)", desc:"A huge princess ballgown that twirls and sparkles." },
+    { id:"dr_star",  cat:"dresses", pic:"🌟", name:"Starlight dress",      price:200, bg:"linear-gradient(145deg,#cdbdf2,#6a5acd)", desc:"A midnight dress covered in twinkling stars." },
+    { id:"dr_swan",  cat:"dresses", pic:"🦢", name:"Swan tutu dress",      price:240, bg:"linear-gradient(145deg,#ffffff,#e0e7ff)", desc:"A graceful swan ballet dress with feathers." },
+    { id:"dr_dia",   cat:"dresses", pic:"💎", name:"Diamond red-carpet gown", price:320, bg:"linear-gradient(145deg,#ffe98a,#ffb347)", desc:"The ultimate dress — covered in diamonds for the red carpet!" },
+
+    // --- Squish Pets (cute collectible plushies; buying makes a pet you can name & dress) ---
+    { id:"sq_cat",   cat:"squish", pic:"🐱", name:"Kitty Squish",   price:60,  petType:"cat",     bg:"linear-gradient(145deg,#ffd6ec,#f29ec9)", desc:"A super-soft kitty Squish pet to name & cuddle." },
+    { id:"sq_bunny", cat:"squish", pic:"🐰", name:"Bunny Squish",   price:70,  petType:"bunny",   bg:"linear-gradient(145deg,#e4dcff,#cdbdf2)", desc:"A squishy bunny with the longest, softest ears." },
+    { id:"sq_panda", cat:"squish", pic:"🐼", name:"Panda Squish",   price:85,  petType:"panda",   bg:"linear-gradient(145deg,#ffffff,#dfe3e8)", desc:"A roly-poly panda Squish pet." },
+    { id:"sq_axo",   cat:"squish", pic:"🩷", name:"Axolotl Squish", price:95,  petType:"axolotl", bg:"linear-gradient(145deg,#ffd6e8,#ff8fc0)", desc:"A frilly pink axolotl — so squishy!" },
+    { id:"sq_dragon",cat:"squish", pic:"🐉", name:"Dragon Squish",  price:115, petType:"dragon",  bg:"linear-gradient(145deg,#c6f5c0,#8fe28f)", desc:"A baby dragon Squish pet with tiny wings." },
+    { id:"sq_uni",   cat:"squish", pic:"🦄", name:"Unicorn Squish", price:140, petType:"unicorn", bg:"linear-gradient(145deg,#ffd6ec,#ffb3e0)", desc:"A magical unicorn Squish pet with a golden horn." }
+  ];
+
+  // ================= Squish Pets data =================
+  var PET_TYPES = {
+    cat:     { label:"Kitty",   color:"#f7b5d8", belly:"#ffe9f5", ear:"#f29ec9", feat:"cat" },
+    bunny:   { label:"Bunny",   color:"#cdbdf2", belly:"#f1ecff", ear:"#f6b8d6", feat:"bunny" },
+    panda:   { label:"Panda",   color:"#fbfbfb", belly:"#eef0f2", ear:"#3a3a3a", feat:"panda" },
+    axolotl: { label:"Axolotl", color:"#ffc6e0", belly:"#ffe9f3", ear:"#ff8fc0", feat:"axolotl" },
+    dragon:  { label:"Dragon",  color:"#8fe28f", belly:"#e2f7df", ear:"#bfeebf", feat:"dragon" },
+    unicorn: { label:"Unicorn", color:"#ffc2e2", belly:"#fff0f8", ear:"#ffd6ec", feat:"unicorn" }
+  };
+  var PET_DEFAULT_NAME = { cat:"Kitty", bunny:"Bun", panda:"Bao", axolotl:"Pinky", dragon:"Sparky", unicorn:"Star" };
+  var PET_ACC = [
+    { id:"none", label:"None" },
+    { id:"bow", label:"Bow", price:8 },
+    { id:"flower", label:"Flower", price:8 },
+    { id:"party", label:"Party hat", price:12 },
+    { id:"scarf", label:"Scarf", price:12 },
+    { id:"sunglasses", label:"Sunnies", price:15 },
+    { id:"crown", label:"Crown", price:30 }
   ];
 
   // ================= Avatar parts =================
@@ -481,6 +577,43 @@
     return s;
   }
 
+  // ================= Squish pet drawing (SVG) =================
+  function petFeat(t){
+    var c=t.color, e=t.ear, f=t.feat;
+    if(f==="cat") return '<path d="M58 72 L48 34 L84 60 Z" fill="'+c+'"/><path d="M142 72 L152 34 L116 60 Z" fill="'+c+'"/><path d="M60 64 L56 46 L74 58 Z" fill="'+e+'"/><path d="M140 64 L144 46 L126 58 Z" fill="'+e+'"/>';
+    if(f==="bunny") return '<ellipse cx="78" cy="32" rx="12" ry="34" fill="'+c+'"/><ellipse cx="122" cy="32" rx="12" ry="34" fill="'+c+'"/><ellipse cx="78" cy="34" rx="6" ry="24" fill="'+e+'"/><ellipse cx="122" cy="34" rx="6" ry="24" fill="'+e+'"/>';
+    if(f==="panda") return '<circle cx="58" cy="62" r="20" fill="#3a3a3a"/><circle cx="142" cy="62" r="20" fill="#3a3a3a"/>';
+    if(f==="axolotl") return '<g fill="'+e+'"><path d="M40 100 q-24 -4 -30 -20 q22 4 32 14 z"/><path d="M38 116 q-26 4 -34 -8 q24 -4 34 2 z"/><path d="M160 100 q24 -4 30 -20 q-22 4 -32 14 z"/><path d="M162 116 q26 4 34 -8 q-24 -4 -34 2 z"/></g>';
+    if(f==="dragon") return '<path d="M70 56 L62 34 L86 54 Z" fill="'+e+'"/><path d="M130 56 L138 34 L114 54 Z" fill="'+e+'"/><path d="M24 112 Q0 94 12 132 Q26 122 32 114 Z" fill="'+c+'"/><path d="M176 112 Q200 94 188 132 Q174 122 168 114 Z" fill="'+c+'"/>';
+    if(f==="unicorn") return '<path d="M100 24 L91 60 L109 60 Z" fill="#ffd23f"/><path d="M72 56 L66 40 L84 54 Z" fill="'+c+'"/><path d="M128 56 L134 40 L116 54 Z" fill="'+c+'"/><path d="M84 56 q16 -12 32 0 q-7 10 -16 10 q-9 0 -16 -10 z" fill="#9b5de5"/>';
+    return "";
+  }
+  function petAccSvg(acc){
+    if(acc==="bow") return '<g transform="translate(70,72)"><path d="M0 0 L-16 -9 L-16 9 Z" fill="#ff5fa2"/><path d="M0 0 L16 -9 L16 9 Z" fill="#ff5fa2"/><circle r="5" fill="#d63a8f"/></g>';
+    if(acc==="flower") return '<g transform="translate(132,70)" fill="#ff7ab8"><circle cx="0" cy="-7" r="6"/><circle cx="7" cy="0" r="6"/><circle cx="-7" cy="0" r="6"/><circle cx="0" cy="7" r="6"/><circle r="5" fill="#ffd23f"/></g>';
+    if(acc==="party") return '<path d="M100 24 L84 62 L116 62 Z" fill="#9b5de5"/><path d="M100 24 L93 42 L107 42 Z" fill="#ffd23f"/><circle cx="100" cy="24" r="5" fill="#ff5fa2"/>';
+    if(acc==="crown") return '<path d="M68 60 L68 38 L84 52 L100 32 L116 52 L132 38 L132 60 Z" fill="#ffd23f" stroke="#e0a800" stroke-width="2"/><circle cx="100" cy="46" r="3.5" fill="#ef476f"/>';
+    if(acc==="scarf") return '<path d="M58 160 Q100 178 142 160 L140 172 Q100 188 60 172 Z" fill="#ff5fa2"/><path d="M128 168 L144 192 L152 187 L138 165 Z" fill="#d63a8f"/>';
+    if(acc==="sunglasses") return '<rect x="62" y="106" width="30" height="16" rx="6" fill="#222"/><rect x="108" y="106" width="30" height="16" rx="6" fill="#222"/><rect x="90" y="111" width="20" height="3" fill="#222"/>';
+    return "";
+  }
+  function petSVG(type, acc){
+    var t = PET_TYPES[type] || PET_TYPES.cat;
+    var s = '<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">';
+    s += '<path d="M28 124 Q28 58 100 58 Q172 58 172 124 Q172 178 100 181 Q28 178 28 124 Z" fill="'+t.color+'"/>';
+    s += '<ellipse cx="100" cy="136" rx="46" ry="40" fill="'+t.belly+'"/>';
+    s += petFeat(t);
+    s += '<circle cx="60" cy="128" r="9" fill="rgba(255,120,150,0.5)"/><circle cx="140" cy="128" r="9" fill="rgba(255,120,150,0.5)"/>';
+    var ec = (t.feat==="panda")?"#ffffff":"#2a2a2a";
+    s += '<circle cx="80" cy="116" r="7.5" fill="'+ec+'"/><circle cx="120" cy="116" r="7.5" fill="'+ec+'"/>';
+    if(t.feat!=="panda") s += '<circle cx="82.5" cy="113" r="2.4" fill="#fff"/><circle cx="122.5" cy="113" r="2.4" fill="#fff"/>';
+    s += '<path d="M92 132 Q100 141 108 132" stroke="#2a2a2a" fill="none" stroke-width="3" stroke-linecap="round"/>';
+    s += petAccSvg(acc);
+    s += '</svg>';
+    return s;
+  }
+  function petCountOfType(type){ var n=0; for(var i=0;i<P.pets.length;i++){ if(P.pets[i].type===type) n++; } return n; }
+
   // ================= Question generation =================
   function favouriteNames(){ return [P?P.name:"Star","Taylor","Mirabelle","Isadora","Mallory","Rumi"]; }
   var THINGS = ["friendship bracelets","glitter pens","stickers","hair bows","concert tickets","magic stars","lip glosses","cupcakes"];
@@ -521,10 +654,14 @@
 
   // ================= Play flow =================
   var QPER=6, play=null, COINVAL={ warm:2, quick:3, bigger:3, story:5 };
-  function startRound(round){ play={ round:round, idx:0, correct:0, earned:0, streak:0, locked:false }; show("s-play"); nextQuestion(); }
+  function startRound(round){ play={ round:round, idx:0, correct:0, earned:0, streak:0, locked:false, frozeDone:false }; show("s-play"); nextQuestion(); }
   function nextQuestion(){
     if(play.idx>=QPER){ endRound(); return; }
     play.locked=false; play.current=makeQuestion(play.round, play.idx);
+    if(maybeFreeze()) return;
+    renderQuestion();
+  }
+  function renderQuestion(){
     $("progress").textContent="Question "+(play.idx+1)+" of "+QPER;
     $("feedback").textContent=""; $("feedback").className="feedback";
     $("streak").textContent=play.streak>=2?("🔥 "+play.streak+" in a row!"):"";
@@ -568,6 +705,43 @@
     $("resultScore").textContent="You got "+play.correct+" out of "+QPER+" right.";
   }
 
+  // ----- Wicked Witch freeze event -----
+  var freeze=null, freezeLock=false;
+  function maybeFreeze(){
+    if(play.frozeDone) return false;
+    if(play.idx<1 || play.idx>=QPER) return false;
+    if(Math.random()>=0.12) return false;
+    startFreeze(); return true;
+  }
+  function coreFreezeTable(){
+    var core=[]; for(var i=0;i<P.tables.length;i++){ var t=P.tables[i]; if([2,4,5,10,11].indexOf(t)!==-1) core.push(t); }
+    if(!core.length) core=P.tables.slice(); if(!core.length) core=[2];
+    return pick(core);
+  }
+  function startFreeze(){
+    play.frozeDone=true; freeze={ table:coreFreezeTable(), step:1, total:12 };
+    $("freezeSub").textContent="Melt the ice — say the "+freeze.table+" times table!";
+    $("freeze").classList.add("on"); freezeLock=false; renderFreeze();
+  }
+  function renderFreeze(){
+    var bar=$("iceBar"); bar.innerHTML="";
+    for(var i=1;i<=freeze.total;i++){ var c=document.createElement("span"); c.className="ice"+(i<freeze.step?" melted":""); c.textContent="🧊"; bar.appendChild(c); }
+    var ans=freeze.table*freeze.step;
+    $("freezeQ").textContent=freeze.step+" × "+freeze.table+" = ?";
+    var opts=$("freezeOpts"); opts.className="opts"; opts.innerHTML=""; var choices=optionsFor(ans);
+    for(var j=0;j<choices.length;j++){ (function(val){ var b=document.createElement("button"); b.className="opt"; b.textContent=val; b.onclick=function(){ freezeAnswer(val,b,ans); }; opts.appendChild(b); })(choices[j]); }
+  }
+  function freezeAnswer(val,btn,ans){
+    if(freezeLock) return; freezeLock=true;
+    if(val===ans){ btn.classList.add("good"); soundGood(); freeze.step++; setTimeout(function(){ freezeLock=false; if(freeze.step>freeze.total) endFreeze(); else renderFreeze(); },480); }
+    else { btn.classList.add("bad"); soundBad(); var all=$("freezeOpts").querySelectorAll(".opt"); for(var i=0;i<all.length;i++){ if(all[i].textContent==ans) all[i].classList.add("good"); } setTimeout(function(){ freezeLock=false; renderFreeze(); },950); }
+  }
+  function endFreeze(){
+    $("freeze").classList.remove("on");
+    P.coins+=5; refreshCoins(); saveStore(); coinPop("+5 🪙"); toast("You melted the ice! ❄️ +5 coins");
+    renderQuestion();
+  }
+
   // ================= Shop =================
   function renderShop(){
     $("shopSub").textContent="You have 🪙"+P.coins+" to spend";
@@ -579,7 +753,7 @@
       for(var i=0;i<CATALOGUE.length;i++){
         if(CATALOGUE[i].cat!==cat.key) continue;
         (function(item){
-          var owned=P.owned[item.id]||0; var div=document.createElement("div"); div.className="item"; var canAfford=P.coins>=item.price;
+          var owned=item.petType?petCountOfType(item.petType):(P.owned[item.id]||0); var div=document.createElement("div"); div.className="item"; var canAfford=P.coins>=item.price;
           var ownLine=owned>0?'<div class="owncount">Owned: '+owned+'</div>':'<div class="owncount">&nbsp;</div>';
           div.innerHTML='<div class="tile" style="background:'+item.bg+'"><span>'+item.pic+'</span></div><div class="nm">'+item.name+'</div>'+ownLine+'<div class="tag '+(canAfford?'':'cant')+'">🪙 '+item.price+'</div>';
           div.onclick=function(){ openDetail(item); }; row.appendChild(div);
@@ -617,15 +791,30 @@
   $("payBtn").onclick=function(){
     if(!payState) return;
     if(payState.total!==payState.item.price){ if(payState.total<payState.item.price) toast("Add 🪙"+(payState.item.price-payState.total)+" more to make the price"); else toast("That's too much — try undo to make exactly 🪙"+payState.item.price); return; }
-    P.coins-=payState.item.price; P.owned[payState.item.id]=(P.owned[payState.item.id]||0)+1; saveStore(); refreshCoins(); soundGood();
+    P.coins-=payState.item.price; soundGood();
+    if(payState.item.petType){
+      P.pets.push({ type:payState.item.petType, name:(PET_DEFAULT_NAME[payState.item.petType]||"Pet"), acc:"none" });
+      saveStore(); refreshCoins();
+      toast("You got a "+payState.item.name+"! Give it a name 🧸");
+      openPet(P.pets.length-1); return;
+    }
+    P.owned[payState.item.id]=(P.owned[payState.item.id]||0)+1; saveStore(); refreshCoins();
     toast("Yay! You bought a "+payState.item.name+"! 🎉"); show("s-coll"); renderCollection();
   };
 
   // ================= Collection =================
   function renderCollection(){
+    var cp=$("collPets"); cp.innerHTML="";
+    if(P.pets.length){
+      var ph=document.createElement("div"); ph.className="pets-head"; ph.textContent="🧸 Squish Pets"; cp.appendChild(ph);
+      var pg=document.createElement("div"); pg.className="pets-grid";
+      for(var p=0;p<P.pets.length;p++){ (function(idx){ var pet=P.pets[idx]; var d=document.createElement("div"); d.className="petitem"; d.innerHTML='<div class="petpic">'+petSVG(pet.type,pet.acc)+'</div><div class="petname">'+pet.name+'</div>'; d.onclick=function(){ openPet(idx); }; pg.appendChild(d); })(p); }
+      cp.appendChild(pg);
+      var th=document.createElement("div"); th.className="pets-head"; th.textContent="🏆 Treasures"; cp.appendChild(th);
+    }
     var grid=$("collgrid"); grid.innerHTML=""; var any=false;
     for(var i=0;i<CATALOGUE.length;i++){ var item=CATALOGUE[i], c=P.owned[item.id]||0; if(c>0){ any=true; var div=document.createElement("div"); div.className="collitem"; div.innerHTML='<div class="tile" style="background:'+item.bg+'"><span>'+item.pic+'</span></div><div class="cnt">'+(c>1?("x"+c):"&nbsp;")+'</div>'; grid.appendChild(div); } }
-    if(!any) grid.innerHTML='<div class="empty">Nothing yet! Play a round, earn coins, and buy your first treasure. ✨</div>';
+    if(!any && !P.pets.length) grid.innerHTML='<div class="empty">Nothing yet! Play a round, earn coins, and buy your first treasure. ✨</div>';
   }
 
   // ================= Dress My Star =================
@@ -665,6 +854,49 @@
     P.avatar[slot]=opt.id; saveStore(); renderDress();
   }
 
+  // ================= My Squish Pets =================
+  var curPet=-1;
+  function renderPets(){
+    var grid=$("petsGrid"); grid.innerHTML="";
+    if(!P.pets.length){ grid.innerHTML='<div class="empty">No pets yet! Buy a cute Squish Pet in the shop. 🧸</div>'; $("petsSub").textContent="Buy a Squish Pet in the shop to start!"; return; }
+    $("petsSub").textContent="Tap a pet to name & dress it!";
+    for(var p=0;p<P.pets.length;p++){ (function(idx){ var pet=P.pets[idx]; var d=document.createElement("div"); d.className="petitem"; d.innerHTML='<div class="petpic">'+petSVG(pet.type,pet.acc)+'</div><div class="petname">'+pet.name+'</div>'; d.onclick=function(){ openPet(idx); }; grid.appendChild(d); })(p); }
+  }
+  function openPet(idx){ curPet=idx; renderPetDetail(); show("s-petdetail"); }
+  function renderPetDetail(){
+    var pet=P.pets[curPet]; if(!pet){ show("s-pets"); return; }
+    $("petBig").innerHTML=petSVG(pet.type, pet.acc);
+    $("petNameInput").value=pet.name;
+    var sw=$("petAccSwatches"); sw.innerHTML="";
+    for(var i=0;i<PET_ACC.length;i++){
+      (function(opt){
+        var owned = !opt.price || P.petAccOwned[opt.id];
+        var selected = pet.acc===opt.id;
+        var b=document.createElement("button"); b.className="swatch"+(selected?" sel":"");
+        var inner='<div style="font-size:15px;min-height:24px;">'+opt.label+'</div>';
+        if(!owned) inner+='<span class="lock">🔒 🪙'+opt.price+'</span>';
+        else if(opt.price) inner+='<span class="lock free">Owned</span>';
+        else inner+='<span class="lock free">&nbsp;</span>';
+        b.innerHTML=inner; b.onclick=function(){ selectPetAcc(opt); }; sw.appendChild(b);
+      })(PET_ACC[i]);
+    }
+  }
+  function selectPetAcc(opt){
+    var pet=P.pets[curPet]; if(!pet) return;
+    var owned = !opt.price || P.petAccOwned[opt.id];
+    if(!owned){
+      if(P.coins<opt.price){ toast("Keep earning — you need 🪙"+(opt.price-P.coins)+" more!"); return; }
+      if(!window.confirm("Unlock "+opt.label+" for 🪙"+opt.price+"?")) return;
+      P.coins-=opt.price; P.petAccOwned[opt.id]=true; refreshCoins(); coinPop("-"+opt.price+" 🪙"); soundCoin();
+    }
+    pet.acc=opt.id; saveStore(); renderPetDetail();
+  }
+  $("petSaveName").onclick=function(){
+    var pet=P.pets[curPet]; if(!pet) return;
+    var nm=($("petNameInput").value||"").trim(); if(!nm){ toast("Type a name first!"); return; }
+    pet.name=nm; saveStore(); soundGood(); toast("Saved! 💖");
+  };
+
   // ================= Settings =================
   function renderSettings(){
     var row=$("settrow"); row.innerHTML="";
@@ -692,7 +924,7 @@
     $("newPlayerBox").style.display="none"; $("nameInput").value="";
   }
   function enterProfile(name){
-    P=store.players[name]; if(!P.avatarOwned) P.avatarOwned={}; if(!P.avatar) P.avatar=defaultProfile(name).avatar;
+    P=store.players[name]; if(!P.avatarOwned) P.avatarOwned={}; if(!P.avatar) P.avatar=defaultProfile(name).avatar; if(!P.pets) P.pets=[]; if(!P.petAccOwned) P.petAccOwned={};
     store.current=name; saveStore(); $("topbar").style.display="flex"; refreshCoins(); renderHome(); show("s-home");
   }
   $("showNewPlayer").onclick=function(){ $("newPlayerBox").style.display="block"; $("nameInput").focus(); };
@@ -707,13 +939,14 @@
   // ================= Navigation =================
   $("goPlay").onclick=function(){ show("s-rounds"); };
   $("goDress").onclick=function(){ editTab="skin"; renderDress(); show("s-dress"); };
+  $("goPets").onclick=function(){ renderPets(); show("s-pets"); };
   $("goShop").onclick=function(){ renderShop(); show("s-shop"); };
   $("goColl").onclick=function(){ renderCollection(); show("s-coll"); };
   $("gearBtn").onclick=function(){ renderSettings(); show("s-set"); };
   var roundBtns=document.querySelectorAll("[data-round]");
   for(var i=0;i<roundBtns.length;i++){ (function(b){ b.onclick=function(){ startRound(b.getAttribute("data-round")); }; })(roundBtns[i]); }
   var goBtns=document.querySelectorAll("[data-go]");
-  for(var k=0;k<goBtns.length;k++){ (function(b){ b.onclick=function(){ var dest=b.getAttribute("data-go"); if(dest==="home"){ renderHome(); show("s-home"); } else if(dest==="rounds") show("s-rounds"); else if(dest==="dress"){ editTab="skin"; renderDress(); show("s-dress"); } else if(dest==="shop"){ renderShop(); show("s-shop"); } else if(dest==="coll"){ renderCollection(); show("s-coll"); } }; })(goBtns[k]); }
+  for(var k=0;k<goBtns.length;k++){ (function(b){ b.onclick=function(){ var dest=b.getAttribute("data-go"); if(dest==="home"){ renderHome(); show("s-home"); } else if(dest==="rounds") show("s-rounds"); else if(dest==="dress"){ editTab="skin"; renderDress(); show("s-dress"); } else if(dest==="shop"){ renderShop(); show("s-shop"); } else if(dest==="pets"){ renderPets(); show("s-pets"); } else if(dest==="coll"){ renderCollection(); show("s-coll"); } }; })(goBtns[k]); }
 
   // ================= Init =================
   if(store.current && store.players[store.current]) enterProfile(store.current);
