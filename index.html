@@ -12,76 +12,59 @@
   html, body { margin: 0; padding: 0; height: 100%; }
   body {
     font-family: -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background: #2a1a4a;
     background: linear-gradient(160deg, #ff7eb3 0%, #b06ab3 45%, #6a5acd 100%);
-    color: #2a1a4a;
-    -webkit-text-size-adjust: 100%;
-    overflow-x: hidden;
+    color: #2a1a4a; -webkit-text-size-adjust: 100%; overflow-x: hidden;
   }
   .wrap { max-width: 640px; margin: 0 auto; padding: 16px; min-height: 100%; }
 
-  /* Top bar */
   .topbar {
     display: flex; align-items: center; justify-content: space-between;
-    background: rgba(255,255,255,0.92);
-    border-radius: 22px; padding: 12px 16px; margin-bottom: 16px;
-    box-shadow: 0 6px 0 rgba(0,0,0,0.12);
+    background: rgba(255,255,255,0.92); border-radius: 22px; padding: 12px 16px;
+    margin-bottom: 16px; box-shadow: 0 6px 0 rgba(0,0,0,0.12);
   }
   .coins { font-size: 28px; font-weight: 800; color: #d6336c; }
   .coins .num { font-variant-numeric: tabular-nums; }
-  .gear {
-    font-size: 26px; background: #fff; border: none; border-radius: 16px;
-    padding: 6px 12px; box-shadow: 0 4px 0 rgba(0,0,0,0.12);
-  }
+  .gear { font-size: 26px; background: #fff; border: none; border-radius: 16px; padding: 6px 12px; box-shadow: 0 4px 0 rgba(0,0,0,0.12); }
 
-  /* Screens */
   .screen { display: none; }
   .screen.active { display: block; }
 
-  h1 { text-align: center; color: #fff; font-size: 34px; margin: 8px 0 4px; text-shadow: 0 3px 0 rgba(0,0,0,0.18); }
+  h1 { text-align: center; color: #fff; font-size: 32px; margin: 8px 0 4px; text-shadow: 0 3px 0 rgba(0,0,0,0.18); }
   .sub { text-align: center; color: #fff; opacity: 0.95; margin: 0 0 18px; font-size: 17px; }
 
   .btn {
-    display: block; width: 100%; border: none; cursor: pointer;
-    font-family: inherit; font-weight: 800; color: #fff;
-    border-radius: 24px; padding: 22px 18px; margin: 0 0 16px;
-    font-size: 24px; text-align: left;
-    box-shadow: 0 7px 0 rgba(0,0,0,0.18);
-    -webkit-appearance: none;
+    display: block; width: 100%; border: none; cursor: pointer; font-family: inherit;
+    font-weight: 800; color: #fff; border-radius: 24px; padding: 22px 18px; margin: 0 0 16px;
+    font-size: 24px; text-align: left; box-shadow: 0 7px 0 rgba(0,0,0,0.18); -webkit-appearance: none;
   }
   .btn:active { transform: translateY(4px); box-shadow: 0 3px 0 rgba(0,0,0,0.18); }
   .btn .em { font-size: 30px; margin-right: 12px; }
   .btn small { display: block; font-size: 15px; font-weight: 600; opacity: 0.95; margin-top: 4px; }
   .b-play { background: #ff5fa2; }
+  .b-dress { background: #9b5de5; }
   .b-shop { background: #ffb703; color: #5a3d00; }
   .b-coll { background: #38b6ff; }
   .b-back { background: rgba(255,255,255,0.9); color: #6a3093; font-size: 18px; padding: 14px; text-align: center; }
-
   .b-warm { background: #4dd599; }
   .b-quick { background: #ff7aa2; }
   .b-bigger { background: #9b5de5; }
   .b-story { background: #ff8c42; }
 
-  .card {
-    background: rgba(255,255,255,0.95); border-radius: 26px;
-    padding: 22px; margin-bottom: 16px; box-shadow: 0 7px 0 rgba(0,0,0,0.12);
-  }
+  .card { background: rgba(255,255,255,0.95); border-radius: 26px; padding: 22px; margin-bottom: 16px; box-shadow: 0 7px 0 rgba(0,0,0,0.12); }
   .progress { text-align: center; color: #fff; font-weight: 700; margin-bottom: 8px; font-size: 16px; }
   .qtext { font-size: 40px; font-weight: 800; text-align: center; margin: 18px 0 24px; color: #3a2168; line-height: 1.2; }
   .qtext.story { font-size: 26px; line-height: 1.35; }
 
   .opts { display: flex; flex-wrap: wrap; justify-content: space-between; }
   .opt {
-    width: 48%; margin-bottom: 14px; border: none; cursor: pointer;
-    font-family: inherit; font-weight: 800; font-size: 34px; color: #fff;
-    background: #7b5ddb; border-radius: 22px; padding: 26px 8px;
-    box-shadow: 0 6px 0 rgba(0,0,0,0.18); -webkit-appearance: none;
+    width: 48%; margin-bottom: 14px; border: none; cursor: pointer; font-family: inherit;
+    font-weight: 800; font-size: 34px; color: #fff; background: #7b5ddb; border-radius: 22px;
+    padding: 26px 8px; box-shadow: 0 6px 0 rgba(0,0,0,0.18); -webkit-appearance: none;
   }
   .opt:active { transform: translateY(3px); box-shadow: 0 3px 0 rgba(0,0,0,0.18); }
   .opt.good { background: #2ecc71 !important; }
   .opt.bad { background: #e74c3c !important; }
   .opt.dim { opacity: 0.45; }
-
   .twobig { display: flex; justify-content: space-between; }
   .twobig .opt { width: 48%; font-size: 38px; padding: 40px 8px; }
 
@@ -90,102 +73,42 @@
   .streak { text-align: center; color: #fff; font-weight: 700; min-height: 22px; }
 
   /* Shop */
-  .shelf { display: flex; flex-wrap: wrap; justify-content: space-between; }
-  .item {
-    width: 48%; background: rgba(255,255,255,0.95); border-radius: 22px;
-    padding: 14px 10px; margin-bottom: 14px; text-align: center;
-    box-shadow: 0 6px 0 rgba(0,0,0,0.12);
-  }
-  .item .tile {
-    width: 88px; height: 88px; margin: 0 auto 8px; border-radius: 24px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 46px; position: relative; overflow: hidden;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.22), inset 0 2px 5px rgba(255,255,255,0.6), inset 0 -7px 12px rgba(0,0,0,0.14);
-  }
-  .item .tile:after {
-    content: ""; position: absolute; top: 6px; left: 10px; right: 30px; height: 34px;
-    background: rgba(255,255,255,0.45); border-radius: 50%; transform: rotate(-12deg);
-  }
-  .item .tile span { position: relative; z-index: 1; text-shadow: 0 2px 3px rgba(0,0,0,0.25); }
-  .item .nm { font-weight: 800; font-size: 15px; margin: 6px 0; color: #3a2168; min-height: 36px; }
-  .item .buy {
-    border: none; font-family: inherit; font-weight: 800; color: #fff;
-    background: #ff5fa2; border-radius: 16px; padding: 10px; width: 100%; font-size: 16px;
-    box-shadow: 0 4px 0 rgba(0,0,0,0.18); -webkit-appearance: none;
-  }
-  .item .buy:active { transform: translateY(2px); box-shadow: 0 2px 0 rgba(0,0,0,0.18); }
-  .item .buy.cant { background: #bbb; }
-  .item .buy.owned { background: #2ecc71; }
-  .item .owncount { font-size: 13px; color: #2a8f5a; font-weight: 700; }
-  .item .tag {
-    display: inline-block; background: #ffd54a; color: #6a4b00; font-weight: 800;
-    padding: 8px 16px; border-radius: 14px; font-size: 17px; margin-top: 2px;
-    box-shadow: 0 3px 0 rgba(0,0,0,0.18);
-  }
-  .item .tag.cant { background: #e2e2e2; color: #9a9a9a; box-shadow: 0 3px 0 rgba(0,0,0,0.08); }
-  .item:active { transform: translateY(2px); }
-
-  /* Shop-front */
-  .awning {
-    height: 34px; border-radius: 16px 16px 0 0; margin: 0 auto 0; max-width: 92%;
-    background: repeating-linear-gradient(90deg, #ff5fa2 0, #ff5fa2 28px, #fff 28px, #fff 56px);
-    box-shadow: 0 5px 10px rgba(0,0,0,0.18);
-  }
-  .awning-scallop {
-    height: 18px; max-width: 92%; margin: 0 auto 16px;
-    background: radial-gradient(circle at 14px bottom, #ff5fa2 0 13px, transparent 14px) 0 0/28px 18px repeat-x;
-  }
-  .aisle {
-    color: #fff; font-weight: 800; font-size: 20px; margin: 18px 0 12px;
-    text-align: center; text-shadow: 0 2px 0 rgba(0,0,0,0.18);
-  }
-  .aisle span {
-    background: rgba(255,255,255,0.22); padding: 6px 18px; border-radius: 16px;
-    display: inline-block;
-  }
   .shelf-row { display: flex; flex-wrap: wrap; justify-content: space-between; }
+  .item { width: 48%; background: rgba(255,255,255,0.95); border-radius: 22px; padding: 14px 10px; margin-bottom: 14px; text-align: center; box-shadow: 0 6px 0 rgba(0,0,0,0.12); }
+  .item:active { transform: translateY(2px); }
+  .item .nm { font-weight: 800; font-size: 15px; margin: 6px 0; color: #3a2168; min-height: 36px; }
+  .item .owncount { font-size: 13px; color: #2a8f5a; font-weight: 700; }
+  .item .tag { display: inline-block; background: #ffd54a; color: #6a4b00; font-weight: 800; padding: 8px 16px; border-radius: 14px; font-size: 17px; margin-top: 2px; box-shadow: 0 3px 0 rgba(0,0,0,0.18); }
+  .item .tag.cant { background: #e2e2e2; color: #9a9a9a; box-shadow: 0 3px 0 rgba(0,0,0,0.08); }
+
+  .tile { width: 88px; height: 88px; margin: 0 auto 8px; border-radius: 24px; display: flex; align-items: center; justify-content: center; font-size: 46px; position: relative; overflow: hidden; box-shadow: 0 6px 12px rgba(0,0,0,0.22), inset 0 2px 5px rgba(255,255,255,0.6), inset 0 -7px 12px rgba(0,0,0,0.14); }
+  .tile:after { content: ""; position: absolute; top: 6px; left: 10px; right: 30px; height: 34px; background: rgba(255,255,255,0.45); border-radius: 50%; transform: rotate(-12deg); }
+  .tile span { position: relative; z-index: 1; text-shadow: 0 2px 3px rgba(0,0,0,0.25); }
+
+  .awning { height: 34px; border-radius: 16px 16px 0 0; margin: 0 auto 0; max-width: 92%; background: repeating-linear-gradient(90deg, #ff5fa2 0, #ff5fa2 28px, #fff 28px, #fff 56px); box-shadow: 0 5px 10px rgba(0,0,0,0.18); }
+  .awning-scallop { height: 18px; max-width: 92%; margin: 0 auto 16px; background: radial-gradient(circle at 14px bottom, #ff5fa2 0 13px, transparent 14px) 0 0/28px 18px repeat-x; }
+  .aisle { color: #fff; font-weight: 800; font-size: 20px; margin: 18px 0 12px; text-align: center; text-shadow: 0 2px 0 rgba(0,0,0,0.18); }
+  .aisle span { background: rgba(255,255,255,0.22); padding: 6px 18px; border-radius: 16px; display: inline-block; }
 
   /* Product page */
   .detailcard { text-align: center; }
-  .tile.big {
-    width: 128px; height: 128px; margin: 4px auto 14px; border-radius: 32px;
-    display: flex; align-items: center; justify-content: center; font-size: 70px;
-    position: relative; overflow: hidden;
-    box-shadow: 0 10px 18px rgba(0,0,0,0.25), inset 0 3px 7px rgba(255,255,255,0.6), inset 0 -10px 16px rgba(0,0,0,0.14);
-  }
-  .tile.big:after {
-    content: ""; position: absolute; top: 10px; left: 16px; right: 46px; height: 48px;
-    background: rgba(255,255,255,0.45); border-radius: 50%; transform: rotate(-12deg);
-  }
-  .tile.big span { position: relative; z-index: 1; text-shadow: 0 3px 4px rgba(0,0,0,0.25); }
+  .tile.big { width: 128px; height: 128px; margin: 4px auto 14px; border-radius: 32px; font-size: 70px; box-shadow: 0 10px 18px rgba(0,0,0,0.25), inset 0 3px 7px rgba(255,255,255,0.6), inset 0 -10px 16px rgba(0,0,0,0.14); }
+  .tile.big:after { top: 10px; left: 16px; right: 46px; height: 48px; }
   .detailcard .nm { font-weight: 800; font-size: 24px; color: #3a2168; }
   .detaildesc { font-size: 17px; color: #6a3093; margin: 8px 0 4px; line-height: 1.35; }
+  .price { text-align: center; font-size: 22px; font-weight: 800; color: #d6336c; margin: 8px 0; }
 
-  /* Pay screen */
+  /* Pay */
   .payitem { text-align: center; }
   .payitem .pic { font-size: 64px; }
   .payitem .nm { font-weight: 800; font-size: 20px; color: #3a2168; }
-  .price { text-align: center; font-size: 22px; font-weight: 800; color: #d6336c; margin: 8px 0; }
-  .tray {
-    background: #fff7d6; border: 3px dashed #e0a800; border-radius: 18px;
-    min-height: 70px; padding: 10px; margin: 12px 0; text-align: center;
-    display: flex; align-items: center; justify-content: center; flex-wrap: wrap;
-  }
-  .traycoin {
-    display: inline-block; min-width: 44px; height: 44px; line-height: 44px;
-    border-radius: 50%; background: #ffd54a; color: #6a4b00; font-weight: 800;
-    margin: 3px; font-size: 15px; box-shadow: inset 0 -3px 0 rgba(0,0,0,0.15);
-  }
+  .tray { background: #fff7d6; border: 3px dashed #e0a800; border-radius: 18px; min-height: 70px; padding: 10px; margin: 12px 0; text-align: center; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; }
+  .traycoin { display: inline-block; min-width: 44px; height: 44px; line-height: 44px; border-radius: 50%; background: #ffd54a; color: #6a4b00; font-weight: 800; margin: 3px; font-size: 15px; box-shadow: inset 0 -3px 0 rgba(0,0,0,0.15); }
   .traytotal { text-align: center; font-size: 20px; font-weight: 800; color: #3a2168; }
   .coinpad { display: flex; flex-wrap: wrap; justify-content: center; margin: 10px 0; }
-  .coinbtn {
-    border: none; cursor: pointer; font-family: inherit; font-weight: 800;
-    width: 60px; height: 60px; border-radius: 50%; margin: 6px;
-    background: #ffd54a; color: #6a4b00; font-size: 16px;
-    box-shadow: 0 5px 0 #d6a700; -webkit-appearance: none;
-  }
+  .coinbtn { border: none; cursor: pointer; font-family: inherit; font-weight: 800; width: 60px; height: 60px; border-radius: 50%; margin: 6px; background: #ffd54a; color: #6a4b00; font-size: 16px; box-shadow: 0 5px 0 #d6a700; -webkit-appearance: none; }
   .coinbtn:active { transform: translateY(3px); box-shadow: 0 2px 0 #d6a700; }
-  .pcoin1{background:#cd7f32;color:#fff;box-shadow:0 5px 0 #8a531f;}
+  .pcoin1 { background: #cd7f32; color: #fff; box-shadow: 0 5px 0 #8a531f; }
   .row2 { display: flex; }
   .row2 .btn { margin-right: 10px; }
   .row2 .btn:last-child { margin-right: 0; }
@@ -196,60 +119,78 @@
   /* Collection */
   .collgrid { display: flex; flex-wrap: wrap; justify-content: flex-start; }
   .collitem { width: 25%; text-align: center; margin-bottom: 14px; }
-  .collitem .tile {
-    width: 64px; height: 64px; margin: 0 auto 4px; border-radius: 18px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 34px; position: relative; overflow: hidden;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.25), inset 0 2px 4px rgba(255,255,255,0.6), inset 0 -5px 9px rgba(0,0,0,0.14);
-  }
-  .collitem .tile:after {
-    content: ""; position: absolute; top: 5px; left: 8px; right: 22px; height: 24px;
-    background: rgba(255,255,255,0.45); border-radius: 50%; transform: rotate(-12deg);
-  }
-  .collitem .tile span { position: relative; z-index: 1; text-shadow: 0 2px 3px rgba(0,0,0,0.25); }
+  .collitem .tile { width: 64px; height: 64px; margin: 0 auto 4px; border-radius: 18px; font-size: 34px; box-shadow: 0 5px 10px rgba(0,0,0,0.25), inset 0 2px 4px rgba(255,255,255,0.6), inset 0 -5px 9px rgba(0,0,0,0.14); }
+  .collitem .tile:after { top: 5px; left: 8px; right: 22px; height: 24px; }
   .collitem .cnt { font-size: 13px; font-weight: 800; color: #fff; }
   .empty { text-align: center; color: #fff; font-size: 18px; padding: 30px 10px; }
 
   /* Settings */
   .settrow { display: flex; flex-wrap: wrap; }
-  .tbtn {
-    width: 30%; margin: 1.5%; border: none; font-family: inherit; font-weight: 800;
-    font-size: 22px; padding: 18px 0; border-radius: 18px; cursor: pointer;
-    background: #ddd; color: #777; box-shadow: 0 5px 0 rgba(0,0,0,0.12); -webkit-appearance: none;
-  }
+  .tbtn { width: 30%; margin: 1.5%; border: none; font-family: inherit; font-weight: 800; font-size: 22px; padding: 18px 0; border-radius: 18px; cursor: pointer; background: #ddd; color: #777; box-shadow: 0 5px 0 rgba(0,0,0,0.12); -webkit-appearance: none; }
   .tbtn.on { background: #2ecc71; color: #fff; }
   .note { color: #fff; font-size: 14px; text-align: center; margin: 6px 0 16px; opacity: 0.95; }
   .reset { background: #e74c3c; }
+  .b-switch { background: #38b6ff; font-size: 18px; padding: 14px; text-align: center; }
 
-  /* Coin pop animation */
-  .pop {
-    position: fixed; left: 50%; top: 40%; transform: translateX(-50%);
-    font-size: 40px; font-weight: 900; color: #ffd54a; text-shadow: 0 2px 6px rgba(0,0,0,0.4);
-    pointer-events: none; z-index: 50; animation: floatup 1s ease-out forwards;
-  }
+  /* Avatar */
+  .avatarbox { width: 200px; height: 220px; margin: 0 auto; }
+  .avatarbox svg { width: 100%; height: 100%; display: block; }
+  .home-avatar { width: 170px; height: 188px; margin: 0 auto 4px; }
+  .home-avatar svg { width: 100%; height: 100%; display: block; }
+  .avatar-frame { background: rgba(255,255,255,0.95); border-radius: 26px; padding: 10px; box-shadow: 0 7px 0 rgba(0,0,0,0.12); margin-bottom: 14px; }
+
+  .tabs { display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 6px; margin-bottom: 12px; }
+  .tab { flex: 0 0 auto; border: none; font-family: inherit; font-weight: 800; font-size: 15px; padding: 10px 14px; margin-right: 8px; border-radius: 16px; background: rgba(255,255,255,0.85); color: #6a3093; cursor: pointer; box-shadow: 0 4px 0 rgba(0,0,0,0.12); -webkit-appearance: none; white-space: nowrap; }
+  .tab.sel { background: #ff5fa2; color: #fff; }
+
+  .swatches { display: flex; flex-wrap: wrap; }
+  .swatch { width: 30%; margin: 1.5%; border: none; font-family: inherit; font-weight: 800; font-size: 14px; padding: 12px 6px; border-radius: 16px; background: rgba(255,255,255,0.95); color: #3a2168; cursor: pointer; box-shadow: 0 4px 0 rgba(0,0,0,0.12); -webkit-appearance: none; position: relative; min-height: 64px; }
+  .swatch:active { transform: translateY(2px); }
+  .swatch.sel { outline: 4px solid #2ecc71; }
+  .swatch .dot { display: block; width: 36px; height: 36px; border-radius: 50%; margin: 0 auto 4px; box-shadow: inset 0 -4px 6px rgba(0,0,0,0.2); }
+  .swatch .lock { display: block; font-size: 13px; color: #d6336c; font-weight: 800; margin-top: 2px; }
+  .swatch .lock.free { color: #2a8f5a; }
+
+  /* Login */
+  .player-btn { display: block; width: 100%; border: none; font-family: inherit; font-weight: 800; font-size: 22px; color: #fff; background: #ff5fa2; border-radius: 22px; padding: 18px; margin-bottom: 14px; cursor: pointer; box-shadow: 0 6px 0 rgba(0,0,0,0.18); -webkit-appearance: none; }
+  .player-btn:active { transform: translateY(3px); box-shadow: 0 3px 0 rgba(0,0,0,0.18); }
+  .player-btn .pcoins { font-size: 15px; font-weight: 700; opacity: 0.95; }
+  .nameinput { width: 100%; font-family: inherit; font-size: 22px; font-weight: 800; text-align: center; padding: 16px; border-radius: 18px; border: 3px solid #fff; color: #3a2168; margin-bottom: 14px; -webkit-user-select: text; user-select: text; }
+
+  .pop { position: fixed; left: 50%; top: 40%; transform: translateX(-50%); font-size: 40px; font-weight: 900; color: #ffd54a; text-shadow: 0 2px 6px rgba(0,0,0,0.4); pointer-events: none; z-index: 50; animation: floatup 1s ease-out forwards; }
   @keyframes floatup { 0%{opacity:0; transform:translate(-50%,10px) scale(0.6);} 20%{opacity:1;} 100%{opacity:0; transform:translate(-50%,-70px) scale(1.3);} }
-  .toast {
-    position: fixed; left: 50%; bottom: 30px; transform: translateX(-50%);
-    background: rgba(0,0,0,0.82); color: #fff; padding: 12px 22px; border-radius: 20px;
-    font-weight: 700; z-index: 60; font-size: 17px; max-width: 90%; text-align: center;
-  }
+  .toast { position: fixed; left: 50%; bottom: 30px; transform: translateX(-50%); background: rgba(0,0,0,0.82); color: #fff; padding: 12px 22px; border-radius: 20px; font-weight: 700; z-index: 60; font-size: 17px; max-width: 90%; text-align: center; }
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <div class="topbar">
+  <div class="topbar" id="topbar" style="display:none;">
     <div class="coins">🪙 <span class="num" id="coinDisplay">0</span></div>
     <button class="gear" id="gearBtn">⚙️</button>
   </div>
 
-  <!-- HOME -->
-  <div class="screen active" id="s-home">
+  <!-- LOGIN -->
+  <div class="screen active" id="s-login">
     <h1>⭐ Star Shop ⭐</h1>
-    <p class="sub">Answer questions, earn coins, fill your collection!</p>
-    <button class="btn b-play" id="goPlay"><span class="em">🎤</span>Play & Earn<small>Answer times tables to win coins</small></button>
-    <button class="btn b-shop" id="goShop"><span class="em">🛍️</span>The Shop<small>Spend your coins on goodies</small></button>
-    <button class="btn b-coll" id="goColl"><span class="em">🏆</span>My Collection<small>See everything you've got</small></button>
+    <p class="sub">Who's playing?</p>
+    <div id="playerList"></div>
+    <div id="newPlayerBox" style="display:none;">
+      <input class="nameinput" id="nameInput" type="text" placeholder="Type your name" maxlength="12" autocomplete="off" autocorrect="off" autocapitalize="words">
+      <button class="btn b-play" id="createPlayer" style="text-align:center;">Start! ⭐</button>
+    </div>
+    <button class="btn b-dress" id="showNewPlayer" style="text-align:center;">➕ New player</button>
+  </div>
+
+  <!-- HOME -->
+  <div class="screen" id="s-home">
+    <div class="avatar-frame"><div class="home-avatar" id="homeAvatar"></div></div>
+    <h1 id="homeGreeting">Hi!</h1>
+    <p class="sub">Answer questions, earn coins, dress your star!</p>
+    <button class="btn b-play" id="goPlay"><span class="em">🎤</span>Play &amp; Earn<small>Answer times tables to win coins</small></button>
+    <button class="btn b-dress" id="goDress"><span class="em">🪞</span><span id="dressLabel">Dress My Star</span><small>Build your face &amp; buy hair, clothes &amp; more</small></button>
+    <button class="btn b-shop" id="goShop"><span class="em">🛍️</span><span id="shopLabel">The Shop</span><small>Spend your coins on goodies</small></button>
+    <button class="btn b-coll" id="goColl"><span class="em">🏆</span><span id="collLabel">My Collection</span><small>See everything you've got</small></button>
   </div>
 
   <!-- ROUND SELECT -->
@@ -282,14 +223,24 @@
       <div style="font-size:24px;font-weight:800;color:#3a2168;" id="resultCoins">You earned 0 coins</div>
       <div style="font-size:18px;margin-top:8px;color:#6a3093;" id="resultScore"></div>
     </div>
+    <button class="btn b-dress" data-go="dress"><span class="em">🪞</span>Dress your star</button>
     <button class="btn b-shop" data-go="shop"><span class="em">🛍️</span>Spend coins in the shop</button>
     <button class="btn b-play" data-go="rounds"><span class="em">🔁</span>Play another round</button>
     <button class="btn b-back" data-go="home">🏠 Home</button>
   </div>
 
+  <!-- DRESS MY STAR -->
+  <div class="screen" id="s-dress">
+    <h1 id="dressTitle">My Star</h1>
+    <div class="avatar-frame"><div class="avatarbox" id="dressAvatar"></div></div>
+    <div class="tabs" id="dressTabs"></div>
+    <div class="swatches" id="dressSwatches"></div>
+    <button class="btn b-back" data-go="home">⬅ Done</button>
+  </div>
+
   <!-- SHOP -->
   <div class="screen" id="s-shop">
-    <h1>🛍️ The Shop</h1>
+    <h1 id="shopTitle">🛍️ The Shop</h1>
     <p class="sub" id="shopSub">Tap something to see it!</p>
     <div class="awning"></div>
     <div class="awning-scallop"></div>
@@ -314,10 +265,7 @@
   <div class="screen" id="s-pay">
     <h1>Pay with coins</h1>
     <div class="card">
-      <div class="payitem">
-        <div class="pic" id="payPic">🎤</div>
-        <div class="nm" id="payName">Item</div>
-      </div>
+      <div class="payitem"><div class="pic" id="payPic">🎤</div><div class="nm" id="payName">Item</div></div>
       <div class="price" id="payPrice">Price: 🪙0</div>
       <div class="tray" id="tray"><span style="color:#bba700;">Tap coins below to make the price</span></div>
       <div class="traytotal">In tray: 🪙<span id="trayTotal">0</span></div>
@@ -332,7 +280,7 @@
 
   <!-- COLLECTION -->
   <div class="screen" id="s-coll">
-    <h1>🏆 My Collection</h1>
+    <h1 id="collTitle">🏆 My Collection</h1>
     <div class="collgrid" id="collgrid"></div>
     <button class="btn b-back" data-go="home">⬅ Back</button>
   </div>
@@ -343,7 +291,8 @@
     <p class="note">Tap a number to turn that times table on or off. Turn on new ones as she learns them.</p>
     <div class="settrow" id="settrow"></div>
     <p class="note">The 4× table is given extra practice while it's switched on.</p>
-    <button class="btn reset" id="resetBtn" style="font-size:18px;padding:14px;">🗑️ Reset coins & collection</button>
+    <button class="btn b-switch" id="switchBtn">👥 Switch player</button>
+    <button class="btn reset" id="resetBtn" style="font-size:18px;padding:14px;">🗑️ Reset this player's coins &amp; stuff</button>
     <button class="btn b-back" data-go="home">⬅ Back</button>
   </div>
 
@@ -353,29 +302,29 @@
 (function(){
   "use strict";
 
-  // ---------- State ----------
-  var KEY = "ttg_state_v1";
-  var DEFAULT = { coins: 0, owned: {}, tables: [2,3,4,5,10,11] };
-  var state = load();
+  // ================= Storage =================
+  var KEY = "ttg_v2";
+  var store = loadStore();
+  var P = null; // current profile
 
-  function load() {
+  function loadStore(){
     try {
       var raw = localStorage.getItem(KEY);
-      if (raw) {
-        var s = JSON.parse(raw);
-        if (!s.owned) s.owned = {};
-        if (!s.tables || !s.tables.length) s.tables = DEFAULT.tables.slice();
-        if (typeof s.coins !== "number") s.coins = 0;
-        return s;
-      }
-    } catch (e) {}
-    return { coins: 0, owned: {}, tables: DEFAULT.tables.slice() };
+      if (raw){ var s = JSON.parse(raw); if(!s.players) s.players={}; return s; }
+    } catch(e){}
+    return { current: null, players: {} };
   }
-  function save() {
-    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  function saveStore(){ try { localStorage.setItem(KEY, JSON.stringify(store)); } catch(e){} }
+
+  function defaultProfile(name){
+    return {
+      name: name, coins: 0, owned: {}, tables: [2,3,4,5,10,11],
+      avatar: { skin:"s1", eyes:"round", mouth:"smile", hair:"short", hairColor:"brown", top:"tshirt", topColor:"pink", hat:"none", glasses:"none", acc:"none" },
+      avatarOwned: {}
+    };
   }
 
-  // ---------- Shop catalogue (personal use, themed for her) ----------
+  // ================= Shop catalogue =================
   var CATS = [
     { key:"beauty",  name:"💄 Makeup & Beauty" },
     { key:"fashion", name:"👗 Fashion" },
@@ -383,23 +332,17 @@
     { key:"magic",   name:"🔮 Magic" },
     { key:"treats",  name:"🍩 Treats & Days Out" }
   ];
-
   var CATALOGUE = [
-    // --- Makeup & Beauty ---
     { id:"gloss",    cat:"beauty",  pic:"💄", name:"Lip gloss",            price:8,   bg:"linear-gradient(145deg,#ff8a9a,#e83f5b)", desc:"Shiny lip gloss to look like a real star." },
     { id:"eyeliner", cat:"beauty",  pic:"🖌️", name:"Eyeliner set",         price:10,  bg:"linear-gradient(145deg,#ff9ec7,#d63a8f)", desc:"An eyeliner and brush set for sparkly eyes." },
     { id:"nails",    cat:"beauty",  pic:"💅", name:"Nail varnish",         price:12,  bg:"linear-gradient(145deg,#ffb3d1,#ff5f9e)", desc:"Glittery nail varnish in your favourite colour." },
     { id:"palette",  cat:"beauty",  pic:"🎨", name:"Makeup palette",       price:20,  bg:"linear-gradient(145deg,#ff9ec7,#9b7bff)", desc:"A full makeup palette with every colour!" },
-
-    // --- Fashion ---
     { id:"bow",      cat:"fashion", pic:"🎀", name:"Hair bow",             price:6,   bg:"linear-gradient(145deg,#ffd1e8,#ff8fc0)", desc:"A pretty hair bow." },
     { id:"croptop",  cat:"fashion", pic:"👚", name:"Crop top",             price:15,  bg:"linear-gradient(145deg,#ffc0e0,#ff7ab8)", desc:"A cool crop top to wear out." },
     { id:"shades",   cat:"fashion", pic:"🕶️", name:"Star sunglasses",      price:18,  bg:"linear-gradient(145deg,#7ad7ff,#3aa0ff)", desc:"Star sunglasses for sunny days." },
     { id:"trainers", cat:"fashion", pic:"👟", name:"New trainers",         price:22,  bg:"linear-gradient(145deg,#a0e0ff,#5a8fff)", desc:"Bouncy brand-new trainers." },
     { id:"zara",     cat:"fashion", pic:"🛍️", name:"Zara shopping spree",  price:30,  bg:"linear-gradient(145deg,#ffd1e0,#c06ab3)", desc:"A whole shopping spree at Zara!" },
     { id:"outfit",   cat:"fashion", pic:"👗", name:"Sparkly stage outfit", price:45,  bg:"linear-gradient(145deg,#ff9ed6,#b06ab3)", desc:"A sparkly stage outfit fit for a popstar." },
-
-    // --- Pop Star ---
     { id:"sticker",  cat:"popstar", pic:"✨", name:"Sparkly sticker",      price:3,   bg:"linear-gradient(145deg,#ffe29a,#ffc371)", desc:"A shiny sticker to start your collection!" },
     { id:"bracelet", cat:"popstar", pic:"💖", name:"Friendship bracelet",  price:5,   bg:"linear-gradient(145deg,#ff9ec7,#ff5f9e)", desc:"A friendship bracelet to swap with friends." },
     { id:"pen",      cat:"popstar", pic:"🖍️", name:"Glitter pen",          price:8,   bg:"linear-gradient(145deg,#ffd66e,#ff9a3d)", desc:"A glitter pen for super sparkly writing." },
@@ -408,467 +351,373 @@
     { id:"ticket",   cat:"popstar", pic:"🎫", name:"Concert ticket",       price:60,  bg:"linear-gradient(145deg,#ffd66e,#ff7a3d)", desc:"A ticket to a real live concert!" },
     { id:"pass",     cat:"popstar", pic:"🌟", name:"Backstage VIP pass",   price:90,  bg:"linear-gradient(145deg,#ffe07a,#ffae34)", desc:"A backstage VIP pass to meet the stars." },
     { id:"headline", cat:"popstar", pic:"🏆", name:"Headline your own show!", price:150, bg:"linear-gradient(145deg,#ffe98a,#ffb347)", desc:"The biggest dream of all — headline your own show!" },
-
-    // --- Magic ---
     { id:"cat",      cat:"magic",   pic:"🐈‍⬛", name:"Witch's cat",         price:12,  bg:"linear-gradient(145deg,#8e7bd6,#4b3b8f)", desc:"A witch's cat companion." },
     { id:"wand",     cat:"magic",   pic:"🪄", name:"Magic wand",           price:14,  bg:"linear-gradient(145deg,#c39bff,#7b4dff)", desc:"A magic wand that really sparkles." },
     { id:"hat",      cat:"magic",   pic:"🧙‍♀️", name:"Witch hat",           price:16,  bg:"linear-gradient(145deg,#a78bdb,#5e3aa8)", desc:"A proper pointy witch hat." },
     { id:"crystal",  cat:"magic",   pic:"🔮", name:"Crystal ball",         price:30,  bg:"linear-gradient(145deg,#7af0d7,#5a8fff)", desc:"A crystal ball to see the future." },
-
-    // --- Treats & Days Out ---
     { id:"sushi",    cat:"treats",  pic:"🍣", name:"Sushi meal",           price:25,  bg:"linear-gradient(145deg,#ffd0b0,#ff8a5c)", desc:"A yummy sushi feast — your favourite!" },
     { id:"dance",    cat:"treats",  pic:"🩰", name:"Dance studio visit",   price:40,  bg:"linear-gradient(145deg,#ffc0e0,#d96aa0)", desc:"A fun trip to the dance studio." },
     { id:"gym",      cat:"treats",  pic:"🤸", name:"Gym visit",            price:40,  bg:"linear-gradient(145deg,#aef0c0,#34b37a)", desc:"A bouncy day out at the gym." },
     { id:"phone",    cat:"treats",  pic:"📱", name:"Mobile phone",         price:120, bg:"linear-gradient(145deg,#bdbfff,#6a5acd)", desc:"Your very own mobile phone — a huge prize!" }
   ];
 
-  // Friendly names for story problems (her favourites)
-  var NAMES = ["Taylor","Mirabelle","Isadora","Mallory","Rumi","Mira","Zoey"];
-  var THINGS = ["friendship bracelets","glitter pens","stickers","hair bows","concert tickets","magic stars","lip glosses","cupcakes"];
+  // ================= Avatar parts =================
+  var SKIN = { s1:"#ffe0bd", s2:"#f6c79b", s3:"#e0ac69", s4:"#c68642", s5:"#8d5524", s6:"#5c3a21" };
+  var HAIRCOL = { brown:"#6b4423", black:"#241a12", blonde:"#f0c75e", ginger:"#c8501f", pink:"#ff7ab8", purple:"#9b5de5", blue:"#3aa3ff", white:"#ededed" };
+  var TOPCOL = { pink:"#ff7ab8", purple:"#9b5de5", blue:"#3aa3ff", teal:"#2ec4b6", yellow:"#ffd23f", red:"#ef476f" };
 
-  // ---------- Helpers ----------
+  var EDIT_TABS = [
+    { slot:"skin",      label:"Skin",       type:"color" },
+    { slot:"eyes",      label:"Eyes",       type:"style" },
+    { slot:"mouth",     label:"Mouth",      type:"style" },
+    { slot:"hair",      label:"Hair",       type:"style" },
+    { slot:"hairColor", label:"Hair colour",type:"color" },
+    { slot:"top",       label:"Clothes",    type:"style" },
+    { slot:"topColor",  label:"Top colour", type:"color" },
+    { slot:"hat",       label:"Hats",       type:"style" },
+    { slot:"glasses",   label:"Glasses",    type:"style" },
+    { slot:"acc",       label:"Extras",     type:"style" }
+  ];
+  var OPTIONS = {
+    skin:      [{id:"s1"},{id:"s2"},{id:"s3"},{id:"s4"},{id:"s5"},{id:"s6"}],
+    eyes:      [{id:"round",label:"Round"},{id:"happy",label:"Happy"},{id:"sparkly",label:"Sparkly"}],
+    mouth:     [{id:"smile",label:"Smile"},{id:"grin",label:"Big grin"},{id:"small",label:"Cute"}],
+    hair:      [{id:"short",label:"Short"},{id:"long",label:"Long"},{id:"none",label:"None"},{id:"bunches",label:"Bunches",price:12},{id:"ponytail",label:"Ponytail",price:12},{id:"curly",label:"Curly",price:15}],
+    hairColor: [{id:"brown"},{id:"black"},{id:"blonde"},{id:"ginger"},{id:"pink"},{id:"purple"},{id:"blue"},{id:"white"}],
+    top:       [{id:"tshirt",label:"T-shirt"},{id:"striped",label:"Stripes"},{id:"dress",label:"Dress",price:18},{id:"stage",label:"Stage outfit",price:45}],
+    topColor:  [{id:"pink"},{id:"purple"},{id:"blue"},{id:"teal"},{id:"yellow"},{id:"red"}],
+    hat:       [{id:"none",label:"None"},{id:"party",label:"Party hat",price:12},{id:"witch",label:"Witch hat",price:16},{id:"crown",label:"Crown",price:40}],
+    glasses:   [{id:"none",label:"None"},{id:"round",label:"Round",price:12},{id:"sun",label:"Sunnies",price:18}],
+    acc:       [{id:"none",label:"None"},{id:"bow",label:"Hair bow",price:8},{id:"earrings",label:"Earrings",price:10}]
+  };
+
+  // ================= Helpers =================
   function $(id){ return document.getElementById(id); }
   function rint(a,b){ return Math.floor(Math.random()*(b-a+1))+a; }
   function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
   function shuffle(arr){ for(var i=arr.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=arr[i]; arr[i]=arr[j]; arr[j]=t; } return arr; }
+  function show(id){ var s=document.querySelectorAll(".screen"); for(var i=0;i<s.length;i++) s[i].classList.remove("active"); $(id).classList.add("active"); window.scrollTo(0,0); }
+  function refreshCoins(){ if(P) $("coinDisplay").textContent = P.coins; }
+  function toast(msg){ var t=document.createElement("div"); t.className="toast"; t.textContent=msg; document.body.appendChild(t); setTimeout(function(){ if(t.parentNode) t.parentNode.removeChild(t); },1800); }
+  function coinPop(text){ var p=document.createElement("div"); p.className="pop"; p.textContent=text; document.body.appendChild(p); setTimeout(function(){ if(p.parentNode) p.parentNode.removeChild(p); },1000); }
 
-  function show(id){
-    var scr = document.querySelectorAll(".screen");
-    for (var i=0;i<scr.length;i++) scr[i].classList.remove("active");
-    $(id).classList.add("active");
-    window.scrollTo(0,0);
-  }
-  function refreshCoins(){ $("coinDisplay").textContent = state.coins; }
-
-  function toast(msg){
-    var t = document.createElement("div");
-    t.className = "toast"; t.textContent = msg;
-    document.body.appendChild(t);
-    setTimeout(function(){ if(t.parentNode) t.parentNode.removeChild(t); }, 1800);
-  }
-  function coinPop(text){
-    var p = document.createElement("div");
-    p.className = "pop"; p.textContent = text;
-    document.body.appendChild(p);
-    setTimeout(function(){ if(p.parentNode) p.parentNode.removeChild(p); }, 1000);
-  }
-
-  // ---------- Sound (gentle, optional) ----------
-  var AC = null;
-  function actx(){
-    if (AC) return AC;
-    try { AC = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){ AC = null; }
-    return AC;
-  }
-  function beep(freq, dur, type){
-    var c = actx(); if(!c) return;
-    try {
-      var o = c.createOscillator(), g = c.createGain();
-      o.type = type || "sine"; o.frequency.value = freq;
-      o.connect(g); g.connect(c.destination);
-      g.gain.setValueAtTime(0.001, c.currentTime);
-      g.gain.exponentialRampToValueAtTime(0.25, c.currentTime + 0.01);
-      g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + dur);
-      o.start(); o.stop(c.currentTime + dur + 0.02);
-    } catch(e){}
-  }
+  var AC=null;
+  function actx(){ if(AC) return AC; try{ AC=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){ AC=null; } return AC; }
+  function beep(freq,dur,type){ var c=actx(); if(!c) return; try{ var o=c.createOscillator(),g=c.createGain(); o.type=type||"sine"; o.frequency.value=freq; o.connect(g); g.connect(c.destination); g.gain.setValueAtTime(0.001,c.currentTime); g.gain.exponentialRampToValueAtTime(0.25,c.currentTime+0.01); g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+dur); o.start(); o.stop(c.currentTime+dur+0.02); }catch(e){} }
   function soundGood(){ beep(660,0.12); setTimeout(function(){beep(990,0.16);},90); }
   function soundBad(){ beep(200,0.22,"triangle"); }
   function soundCoin(){ beep(880,0.07); setTimeout(function(){beep(1175,0.09);},70); }
 
-  // ---------- Table weighting ----------
-  function weightedTable(){
-    var bag = [];
-    for (var i=0;i<state.tables.length;i++){
-      var t = state.tables[i];
-      bag.push(t);
-      if (t === 4) { bag.push(4); bag.push(4); } // extra practice for the 4s
+  // ================= Avatar drawing (SVG) =================
+  function hairBack(style,c){
+    if(style==="long") return '<path d="M34 80 Q22 210 72 212 L128 212 Q178 210 166 80 Z" fill="'+c+'"/>';
+    if(style==="ponytail") return '<path d="M150 64 Q205 86 184 156 Q176 182 152 166 Q186 120 140 84 Z" fill="'+c+'"/>';
+    return "";
+  }
+  function hairFront(style,c){
+    if(style==="none") return "";
+    var cap = '<path d="M32 92 Q32 22 100 22 Q168 22 168 92 Q168 64 132 58 Q116 80 100 80 Q84 80 68 58 Q32 64 32 92 Z" fill="'+c+'"/>';
+    if(style==="bunches") return '<circle cx="38" cy="58" r="24" fill="'+c+'"/><circle cx="162" cy="58" r="24" fill="'+c+'"/>'+cap;
+    if(style==="curly"){ var b=""; for(var x=38;x<=162;x+=22){ b+='<circle cx="'+x+'" cy="42" r="20" fill="'+c+'"/>'; } return b+cap; }
+    return cap;
+  }
+  function topShape(style,c){
+    if(style==="dress") return '<path d="M40 220 Q36 168 100 156 Q164 168 160 220 Z" fill="'+c+'"/>';
+    var base = '<path d="M50 220 Q48 166 100 156 Q152 166 150 220 Z" fill="'+c+'"/>';
+    if(style==="striped") return base + '<path d="M50 220 Q48 166 100 156 Q152 166 150 220 Z" fill="url(#stripe)"/>';
+    if(style==="stage") return base + '<g fill="#fff" opacity="0.85"><circle cx="80" cy="186" r="3"/><circle cx="100" cy="200" r="3"/><circle cx="120" cy="184" r="3"/><circle cx="92" cy="172" r="2.5"/><circle cx="112" cy="204" r="2.5"/></g>';
+    return base;
+  }
+  function eyesSvg(style){
+    function one(x){
+      if(style==="happy") return '<path d="M'+(x-10)+' 100 Q'+x+' 90 '+(x+10)+' 100" stroke="#3a2a1a" stroke-width="4" fill="none" stroke-linecap="round"/>';
+      var base='<circle cx="'+x+'" cy="98" r="10" fill="#fff"/><circle cx="'+x+'" cy="100" r="5.5" fill="#3a2a1a"/><circle cx="'+(x+2)+'" cy="96" r="1.8" fill="#fff"/>';
+      if(style==="sparkly") base+='<path d="M'+(x+9)+' 88 l2 4 4 2 -4 2 -2 4 -2 -4 -4 -2 4 -2 z" fill="#fff"/>';
+      return base;
     }
-    if (!bag.length) bag = [2,3,4,5,10];
+    return one(76)+one(124);
+  }
+  function mouthSvg(style){
+    if(style==="grin") return '<path d="M80 120 Q100 148 120 120 Z" fill="#fff" stroke="#c0392b" stroke-width="3"/>';
+    if(style==="small") return '<path d="M90 126 Q100 134 110 126" stroke="#c0392b" stroke-width="4" fill="none" stroke-linecap="round"/>';
+    return '<path d="M82 122 Q100 140 118 122" stroke="#c0392b" stroke-width="5" fill="none" stroke-linecap="round"/>';
+  }
+  function glassesSvg(style){
+    if(style==="sun") return '<rect x="60" y="88" width="32" height="20" rx="8" fill="#222"/><rect x="108" y="88" width="32" height="20" rx="8" fill="#222"/><rect x="90" y="94" width="20" height="4" fill="#222"/>';
+    if(style==="round") return '<circle cx="76" cy="98" r="14" fill="none" stroke="#333" stroke-width="3"/><circle cx="124" cy="98" r="14" fill="none" stroke="#333" stroke-width="3"/><line x1="90" y1="98" x2="110" y2="98" stroke="#333" stroke-width="3"/>';
+    return "";
+  }
+  function hatSvg(style){
+    if(style==="party") return '<path d="M100 -18 L80 34 L120 34 Z" fill="#ff5fa2"/><path d="M100 -18 L92 12 L108 12 Z" fill="#ffd23f"/><circle cx="100" cy="-18" r="6" fill="#ffd23f"/>';
+    if(style==="witch") return '<ellipse cx="100" cy="34" rx="72" ry="14" fill="#2d1b4e"/><path d="M62 36 L100 -34 L138 36 Z" fill="#3a2a5e"/><rect x="80" y="20" width="40" height="9" rx="2" fill="#ffd23f"/><path d="M84 20 l3 5 5 1 -4 4 1 5 -5 -3 -5 3 1 -5 -4 -4 5 -1 z" fill="#fff" opacity="0.9"/>';
+    if(style==="crown") return '<path d="M60 36 L60 8 L78 24 L100 2 L122 24 L140 8 L140 36 Z" fill="#ffd23f" stroke="#e0a800" stroke-width="2"/><circle cx="100" cy="20" r="4" fill="#ef476f"/><circle cx="74" cy="26" r="3" fill="#3aa3ff"/><circle cx="126" cy="26" r="3" fill="#3aa3ff"/>';
+    return "";
+  }
+  function accSvg(style){
+    if(style==="earrings") return '<circle cx="40" cy="116" r="4.5" fill="#ffd23f" stroke="#e0a800" stroke-width="1"/><circle cx="160" cy="116" r="4.5" fill="#ffd23f" stroke="#e0a800" stroke-width="1"/>';
+    if(style==="bow") return '<g transform="translate(62,42)"><path d="M0 0 L-16 -9 L-16 9 Z" fill="#ff5fa2"/><path d="M0 0 L16 -9 L16 9 Z" fill="#ff5fa2"/><circle r="5" fill="#d63a8f"/></g>';
+    return "";
+  }
+  function avatarSVG(av){
+    var skin = SKIN[av.skin]||SKIN.s1;
+    var hc = HAIRCOL[av.hairColor]||HAIRCOL.brown;
+    var tc = TOPCOL[av.topColor]||TOPCOL.pink;
+    var s = '<svg viewBox="0 -30 200 250" xmlns="http://www.w3.org/2000/svg">';
+    s += '<defs><pattern id="stripe" width="20" height="20" patternUnits="userSpaceOnUse"><rect width="20" height="20" fill="rgba(255,255,255,0)"/><rect width="10" height="20" fill="rgba(255,255,255,0.55)"/></pattern></defs>';
+    s += hairBack(av.hair, hc);
+    s += topShape(av.top, tc);
+    s += '<rect x="90" y="138" width="20" height="26" rx="8" fill="'+skin+'"/>';
+    s += '<ellipse cx="40" cy="100" rx="10" ry="14" fill="'+skin+'"/><ellipse cx="160" cy="100" rx="10" ry="14" fill="'+skin+'"/>';
+    s += accSvg(av.acc==="earrings"?"earrings":"");
+    s += '<ellipse cx="100" cy="94" rx="60" ry="64" fill="'+skin+'"/>';
+    s += eyesSvg(av.eyes);
+    s += '<path d="M100 104 Q96 112 100 114" stroke="rgba(0,0,0,0.18)" stroke-width="3" fill="none" stroke-linecap="round"/>';
+    s += mouthSvg(av.mouth);
+    s += glassesSvg(av.glasses);
+    s += hairFront(av.hair, hc);
+    s += hatSvg(av.hat);
+    if(av.acc==="bow") s += accSvg("bow");
+    s += '</svg>';
+    return s;
+  }
+
+  // ================= Question generation =================
+  function favouriteNames(){ return [P?P.name:"Star","Taylor","Mirabelle","Isadora","Mallory","Rumi"]; }
+  var THINGS = ["friendship bracelets","glitter pens","stickers","hair bows","concert tickets","magic stars","lip glosses","cupcakes"];
+
+  function weightedTable(){
+    var bag=[];
+    for(var i=0;i<P.tables.length;i++){ var t=P.tables[i]; bag.push(t); if(t===4){ bag.push(4); bag.push(4); } }
+    if(!bag.length) bag=[2,3,4,5,10];
     return pick(bag);
   }
-
-  // ---------- Question generation ----------
   function optionsFor(answer){
-    var set = {}; set[answer] = true;
-    var opts = [answer];
-    var guard = 0;
-    while (opts.length < 4 && guard < 50){
-      guard++;
-      var delta = pick([-3,-2,-1,1,2,3,4,answer>10?-10:5]);
-      var cand = answer + delta;
-      if (cand > 0 && !set[cand]) { set[cand] = true; opts.push(cand); }
-    }
-    while (opts.length < 4) { var f = answer + opts.length; if(!set[f]){set[f]=true;opts.push(f);} }
+    var set={}; set[answer]=true; var opts=[answer]; var guard=0;
+    while(opts.length<4 && guard<50){ guard++; var delta=pick([-3,-2,-1,1,2,3,4,answer>10?-10:5]); var cand=answer+delta; if(cand>0 && !set[cand]){ set[cand]=true; opts.push(cand); } }
+    while(opts.length<4){ var f=answer+opts.length; if(!set[f]){ set[f]=true; opts.push(f); } }
     return shuffle(opts);
   }
-
   function makeQuestion(round, idx){
-    if (round === "warm"){
-      // one table for the whole round, ascending multipliers
-      if (idx === 0) makeQuestion._table = weightedTable();
-      var t = makeQuestion._table;
-      var m = idx + 1; // 1..6
-      var ans = t * m;
-      // Multiplier first to match the spoken chant: "1 × 11", "2 × 11", "3 × 11"...
-      return { type:"choice", text: m + " × " + t + " = ?", answer: ans, opts: optionsFor(ans) };
+    if(round==="warm"){
+      if(idx===0) makeQuestion._table=weightedTable();
+      var t=makeQuestion._table, m=idx+1, ans=t*m;
+      return { type:"choice", text:m+" × "+t+" = ?", answer:ans, opts:optionsFor(ans) };
     }
-    if (round === "quick"){
-      var a = weightedTable(), b = rint(1,12);
-      var an = a*b;
-      return { type:"choice", text: a + " × " + b + " = ?", answer: an, opts: optionsFor(an) };
+    if(round==="quick"){ var a=weightedTable(), b=rint(1,12), an=a*b; return { type:"choice", text:a+" × "+b+" = ?", answer:an, opts:optionsFor(an) }; }
+    if(round==="bigger"){
+      var l,r,lp,rp,guard=0;
+      do{ l=weightedTable(); var lm=rint(1,12); lp=l*lm; r=weightedTable(); var rm=rint(1,12); rp=r*rm; guard++; }while(lp===rp && guard<30);
+      if(lp===rp) rp=rp+r;
+      return { type:"bigger", text:"Which is bigger?", left:l+" × "+Math.round(lp/l), leftVal:lp, right:r+" × "+Math.round(rp/r), rightVal:rp, answer:(lp>rp?"L":"R") };
     }
-    if (round === "bigger"){
-      var l, r, lp, rp, guard=0;
-      do {
-        l = weightedTable(); var lm = rint(1,12); lp = l*lm;
-        r = weightedTable(); var rm = rint(1,12); rp = r*rm;
-        guard++;
-      } while (lp === rp && guard < 30);
-      if (lp === rp) rp = rp + r;
-      var leftBigger = lp > rp;
-      return {
-        type:"bigger",
-        text: "Which is bigger?",
-        left: l + " × " + Math.round(lp/l), leftVal: lp,
-        right: r + " × " + Math.round(rp/r), rightVal: rp,
-        answer: leftBigger ? "L" : "R"
-      };
-    }
-    // story
-    var st = weightedTable(), sm = rint(2,6);
-    var nm = pick(NAMES), thing = pick(THINGS);
-    var sans = st * sm;
-    var templates = [
-      nm + " has " + sm + " boxes. Each box has " + st + " " + thing + ". How many altogether?",
-      "There are " + sm + " friends. Each one gets " + st + " " + thing + ". How many " + thing + " in total?",
-      nm + " buys " + sm + " bags of " + st + " " + thing + ". How many " + thing + " does she have?"
+    var st=weightedTable(), sm=rint(2,6), nm=pick(favouriteNames()), thing=pick(THINGS), sans=st*sm;
+    var templates=[
+      nm+" has "+sm+" boxes. Each box has "+st+" "+thing+". How many altogether?",
+      "There are "+sm+" friends. Each one gets "+st+" "+thing+". How many "+thing+" in total?",
+      nm+" buys "+sm+" bags of "+st+" "+thing+". How many "+thing+" does she have?"
     ];
-    return { type:"choice", story:true, text: pick(templates), answer: sans, opts: optionsFor(sans) };
+    return { type:"choice", story:true, text:pick(templates), answer:sans, opts:optionsFor(sans) };
   }
 
-  // ---------- Play flow ----------
-  var QPER = 6;
-  var play = null;
-  var COINVAL = { warm:2, quick:3, bigger:3, story:5 };
-
-  function startRound(round){
-    play = { round: round, idx: 0, correct: 0, earned: 0, streak: 0, locked: false };
-    show("s-play");
-    nextQuestion();
-  }
-
+  // ================= Play flow =================
+  var QPER=6, play=null, COINVAL={ warm:2, quick:3, bigger:3, story:5 };
+  function startRound(round){ play={ round:round, idx:0, correct:0, earned:0, streak:0, locked:false }; show("s-play"); nextQuestion(); }
   function nextQuestion(){
-    if (play.idx >= QPER){ endRound(); return; }
-    play.locked = false;
-    play.current = makeQuestion(play.round, play.idx);
-    $("progress").textContent = "Question " + (play.idx+1) + " of " + QPER;
-    $("feedback").textContent = "";
-    $("feedback").className = "feedback";
-    $("streak").textContent = play.streak >= 2 ? ("🔥 " + play.streak + " in a row!") : "";
-
-    var q = play.current;
-    var qt = $("qtext");
-    var opts = $("opts");
-    opts.innerHTML = "";
-
-    if (q.type === "bigger"){
-      qt.textContent = q.text;
-      qt.className = "qtext";
-      opts.className = "twobig";
-      var bl = document.createElement("button"); bl.className="opt"; bl.textContent = q.left; bl.setAttribute("data-side","L");
-      var br = document.createElement("button"); br.className="opt"; br.textContent = q.right; br.setAttribute("data-side","R");
+    if(play.idx>=QPER){ endRound(); return; }
+    play.locked=false; play.current=makeQuestion(play.round, play.idx);
+    $("progress").textContent="Question "+(play.idx+1)+" of "+QPER;
+    $("feedback").textContent=""; $("feedback").className="feedback";
+    $("streak").textContent=play.streak>=2?("🔥 "+play.streak+" in a row!"):"";
+    var q=play.current, qt=$("qtext"), opts=$("opts"); opts.innerHTML="";
+    if(q.type==="bigger"){
+      qt.textContent=q.text; qt.className="qtext"; opts.className="twobig";
+      var bl=document.createElement("button"); bl.className="opt"; bl.textContent=q.left;
+      var br=document.createElement("button"); br.className="opt"; br.textContent=q.right;
       opts.appendChild(bl); opts.appendChild(br);
-      bl.onclick = function(){ answerBigger("L", bl, br, q); };
-      br.onclick = function(){ answerBigger("R", bl, br, q); };
+      bl.onclick=function(){ answerBigger("L",bl,br,q); }; br.onclick=function(){ answerBigger("R",bl,br,q); };
     } else {
-      qt.textContent = q.text;
-      qt.className = q.story ? "qtext story" : "qtext";
-      opts.className = "opts";
-      for (var i=0;i<q.opts.length;i++){
-        (function(val){
-          var b = document.createElement("button");
-          b.className = "opt"; b.textContent = val;
-          b.onclick = function(){ answerChoice(val, b, q); };
-          opts.appendChild(b);
-        })(q.opts[i]);
-      }
+      qt.textContent=q.text; qt.className=q.story?"qtext story":"qtext"; opts.className="opts";
+      for(var i=0;i<q.opts.length;i++){ (function(val){ var b=document.createElement("button"); b.className="opt"; b.textContent=val; b.onclick=function(){ answerChoice(val,b,q); }; opts.appendChild(b); })(q.opts[i]); }
     }
   }
-
-  function awardCoins(n){
-    state.coins += n; play.earned += n;
-    refreshCoins(); save();
-    coinPop("+" + n + " 🪙"); soundCoin();
-  }
-
+  function awardCoins(n){ P.coins+=n; play.earned+=n; refreshCoins(); saveStore(); coinPop("+"+n+" 🪙"); soundCoin(); }
   function handleCorrect(){
-    play.correct++; play.streak++;
-    var base = COINVAL[play.round];
-    var bonus = 0;
-    if (play.streak > 0 && play.streak % 3 === 0) bonus = 2;
-    awardCoins(base + bonus);
-    var f = $("feedback");
-    f.className = "feedback win";
-    f.textContent = bonus ? ("Yes! Streak bonus! 🌟") : pick(["Yes! 🎉","Brilliant! ✨","Correct! 💖","Star! ⭐"]);
-    soundGood();
-    $("streak").textContent = play.streak >= 2 ? ("🔥 " + play.streak + " in a row!") : "";
+    play.correct++; play.streak++; var base=COINVAL[play.round], bonus=0;
+    if(play.streak>0 && play.streak%3===0) bonus=2; awardCoins(base+bonus);
+    var f=$("feedback"); f.className="feedback win"; f.textContent=bonus?("Yes! Streak bonus! 🌟"):pick(["Yes! 🎉","Brilliant! ✨","Correct! 💖","Star! ⭐"]);
+    soundGood(); $("streak").textContent=play.streak>=2?("🔥 "+play.streak+" in a row!"):"";
   }
-
-  function handleWrong(){
-    play.streak = 0;
-    var f = $("feedback");
-    f.className = "feedback";
-    f.style.color = "#fff";
-    f.textContent = "Almost! ";
-    soundBad();
+  function handleWrong(){ play.streak=0; var f=$("feedback"); f.className="feedback"; f.style.color="#fff"; soundBad(); }
+  function answerChoice(val,btn,q){
+    if(play.locked) return; play.locked=true; var all=$("opts").querySelectorAll(".opt");
+    if(val===q.answer){ btn.classList.add("good"); handleCorrect(); }
+    else { btn.classList.add("bad"); for(var i=0;i<all.length;i++){ if(all[i].textContent==q.answer) all[i].classList.add("good"); } $("feedback").textContent="Almost! The answer is "+q.answer; $("feedback").style.color="#fff"; handleWrong(); }
+    for(var j=0;j<all.length;j++){ all[j].onclick=null; if(!all[j].classList.contains("good")&&!all[j].classList.contains("bad")) all[j].classList.add("dim"); }
+    play.idx++; setTimeout(nextQuestion,1300);
   }
-
-  function answerChoice(val, btn, q){
-    if (play.locked) return;
-    play.locked = true;
-    var all = $("opts").querySelectorAll(".opt");
-    if (val === q.answer){
-      btn.classList.add("good");
-      handleCorrect();
-    } else {
-      btn.classList.add("bad");
-      for (var i=0;i<all.length;i++){ if (all[i].textContent == q.answer) all[i].classList.add("good"); }
-      $("feedback").textContent = "Almost! The answer is " + q.answer;
-      $("feedback").style.color = "#fff";
-      handleWrong();
-    }
-    for (var j=0;j<all.length;j++){ all[j].onclick=null; if(!all[j].classList.contains("good")&&!all[j].classList.contains("bad")) all[j].classList.add("dim"); }
-    play.idx++;
-    setTimeout(nextQuestion, 1300);
+  function answerBigger(side,bl,br,q){
+    if(play.locked) return; play.locked=true; var chosen=side==="L"?bl:br, correctBtn=q.answer==="L"?bl:br;
+    if(side===q.answer){ chosen.classList.add("good"); handleCorrect(); }
+    else { chosen.classList.add("bad"); correctBtn.classList.add("good"); $("feedback").textContent="Almost! "+(q.answer==="L"?q.left:q.right)+" = "+(q.answer==="L"?q.leftVal:q.rightVal); $("feedback").style.color="#fff"; handleWrong(); }
+    bl.onclick=null; br.onclick=null; play.idx++; setTimeout(nextQuestion,1400);
   }
-
-  function answerBigger(side, bl, br, q){
-    if (play.locked) return;
-    play.locked = true;
-    var chosen = side === "L" ? bl : br;
-    var correctBtn = q.answer === "L" ? bl : br;
-    if (side === q.answer){
-      chosen.classList.add("good"); handleCorrect();
-    } else {
-      chosen.classList.add("bad"); correctBtn.classList.add("good");
-      $("feedback").textContent = "Almost! " + (q.answer==="L"?q.left:q.right) + " = " + (q.answer==="L"?q.leftVal:q.rightVal);
-      $("feedback").style.color = "#fff";
-      handleWrong();
-    }
-    bl.onclick=null; br.onclick=null;
-    play.idx++;
-    setTimeout(nextQuestion, 1400);
-  }
-
   function endRound(){
     show("s-result");
-    $("resultTitle").textContent = play.correct === QPER ? "Perfect round! 🏆" : (play.correct >= QPER/2 ? "Great job! 🎉" : "Good try! 💪");
-    $("resultCoins").textContent = "You earned " + play.earned + " coins";
-    $("resultScore").textContent = "You got " + play.correct + " out of " + QPER + " right.";
+    $("resultTitle").textContent=play.correct===QPER?"Perfect round! 🏆":(play.correct>=QPER/2?"Great job! 🎉":"Good try! 💪");
+    $("resultCoins").textContent="You earned "+play.earned+" coins";
+    $("resultScore").textContent="You got "+play.correct+" out of "+QPER+" right.";
   }
 
-  // ---------- Shop ----------
+  // ================= Shop =================
   function renderShop(){
-    $("shopSub").textContent = "You have 🪙" + state.coins + " to spend";
-    var shelf = $("shelf");
-    shelf.innerHTML = "";
-    for (var c=0;c<CATS.length;c++){
-      var cat = CATS[c];
-      var aisle = document.createElement("div");
-      aisle.className = "aisle";
-      aisle.innerHTML = "<span>" + cat.name + "</span>";
-      shelf.appendChild(aisle);
-
-      var row = document.createElement("div");
-      row.className = "shelf-row";
-      shelf.appendChild(row);
-
-      for (var i=0;i<CATALOGUE.length;i++){
-        if (CATALOGUE[i].cat !== cat.key) continue;
+    $("shopSub").textContent="You have 🪙"+P.coins+" to spend";
+    var shelf=$("shelf"); shelf.innerHTML="";
+    for(var c=0;c<CATS.length;c++){
+      var cat=CATS[c];
+      var aisle=document.createElement("div"); aisle.className="aisle"; aisle.innerHTML="<span>"+cat.name+"</span>"; shelf.appendChild(aisle);
+      var row=document.createElement("div"); row.className="shelf-row"; shelf.appendChild(row);
+      for(var i=0;i<CATALOGUE.length;i++){
+        if(CATALOGUE[i].cat!==cat.key) continue;
         (function(item){
-          var owned = state.owned[item.id] || 0;
-          var div = document.createElement("div");
-          div.className = "item";
-          var canAfford = state.coins >= item.price;
-          var ownLine = owned > 0 ? '<div class="owncount">Owned: ' + owned + '</div>' : '<div class="owncount">&nbsp;</div>';
-          div.innerHTML =
-            '<div class="tile" style="background:' + item.bg + '"><span>' + item.pic + '</span></div>' +
-            '<div class="nm">' + item.name + '</div>' +
-            ownLine +
-            '<div class="tag ' + (canAfford?'':'cant') + '">🪙 ' + item.price + '</div>';
-          div.onclick = function(){ openDetail(item); };
-          row.appendChild(div);
+          var owned=P.owned[item.id]||0; var div=document.createElement("div"); div.className="item"; var canAfford=P.coins>=item.price;
+          var ownLine=owned>0?'<div class="owncount">Owned: '+owned+'</div>':'<div class="owncount">&nbsp;</div>';
+          div.innerHTML='<div class="tile" style="background:'+item.bg+'"><span>'+item.pic+'</span></div><div class="nm">'+item.name+'</div>'+ownLine+'<div class="tag '+(canAfford?'':'cant')+'">🪙 '+item.price+'</div>';
+          div.onclick=function(){ openDetail(item); }; row.appendChild(div);
         })(CATALOGUE[i]);
       }
     }
   }
-
-  // ---------- Product page ----------
   function openDetail(item){
-    show("s-detail");
-    $("detailTile").style.background = item.bg;
-    $("detailPic").textContent = item.pic;
-    $("detailName").textContent = item.name;
-    $("detailDesc").textContent = item.desc || "";
-    $("detailPrice").textContent = "🪙 " + item.price;
-    var buy = $("detailBuy");
-    var canAfford = state.coins >= item.price;
-    buy.textContent = canAfford ? "🛍️ Buy it!" : ("Need 🪙" + (item.price - state.coins) + " more");
-    buy.className = canAfford ? "btn b-pay" : "btn b-pay off";
-    buy.style.marginTop = "6px";
-    buy.onclick = function(){
-      if (state.coins < item.price){ toast("Keep earning — you need 🪙" + (item.price - state.coins) + " more!"); return; }
-      openPay(item);
-    };
+    show("s-detail"); $("detailTile").style.background=item.bg; $("detailPic").textContent=item.pic;
+    $("detailName").textContent=item.name; $("detailDesc").textContent=item.desc||""; $("detailPrice").textContent="🪙 "+item.price;
+    var buy=$("detailBuy"), canAfford=P.coins>=item.price;
+    buy.textContent=canAfford?"🛍️ Buy it!":("Need 🪙"+(item.price-P.coins)+" more");
+    buy.className=canAfford?"btn b-pay":"btn b-pay off"; buy.style.marginTop="6px";
+    buy.onclick=function(){ if(P.coins<item.price){ toast("Keep earning — you need 🪙"+(item.price-P.coins)+" more!"); return; } openPay(item); };
   }
-  $("detailBack").onclick = function(){ renderShop(); show("s-shop"); };
+  $("detailBack").onclick=function(){ renderShop(); show("s-shop"); };
 
-  // ---------- Pay with coins ----------
-  var COIN_DENOMS = [1,2,5,10,20,50];
-  var payState = null;
+  // ================= Pay =================
+  var COIN_DENOMS=[1,2,5,10,20,50], payState=null;
   function openPay(item){
-    payState = { item: item, tray: [], total: 0 };
-    show("s-pay");
-    $("payPic").textContent = item.pic;
-    $("payName").textContent = item.name;
-    $("payPrice").textContent = "Price: 🪙 " + item.price;
-    renderCoinpad();
-    renderTray();
+    payState={ item:item, tray:[], total:0 }; show("s-pay");
+    $("payPic").textContent=item.pic; $("payName").textContent=item.name; $("payPrice").textContent="Price: 🪙 "+item.price;
+    renderCoinpad(); renderTray();
   }
-  function renderCoinpad(){
-    var pad = $("coinpad");
-    pad.innerHTML = "";
-    for (var i=0;i<COIN_DENOMS.length;i++){
-      (function(d){
-        var b = document.createElement("button");
-        b.className = "coinbtn" + (d===1?" pcoin1":"");
-        b.textContent = d;
-        b.onclick = function(){ addCoin(d); };
-        pad.appendChild(b);
-      })(COIN_DENOMS[i]);
-    }
-  }
-  function addCoin(d){
-    payState.tray.push(d);
-    payState.total += d;
-    soundCoin();
-    renderTray();
-  }
+  function renderCoinpad(){ var pad=$("coinpad"); pad.innerHTML=""; for(var i=0;i<COIN_DENOMS.length;i++){ (function(d){ var b=document.createElement("button"); b.className="coinbtn"+(d===1?" pcoin1":""); b.textContent=d; b.onclick=function(){ addCoin(d); }; pad.appendChild(b); })(COIN_DENOMS[i]); } }
+  function addCoin(d){ payState.tray.push(d); payState.total+=d; soundCoin(); renderTray(); }
   function renderTray(){
-    var tray = $("tray");
-    if (payState.tray.length === 0){
-      tray.innerHTML = '<span style="color:#bba700;">Tap coins below to make the price</span>';
-    } else {
-      tray.innerHTML = "";
-      for (var i=0;i<payState.tray.length;i++){
-        var s = document.createElement("span");
-        s.className = "traycoin"; s.textContent = payState.tray[i];
-        tray.appendChild(s);
-      }
-    }
-    $("trayTotal").textContent = payState.total;
-    var ready = payState.total === payState.item.price;
-    var pb = $("payBtn");
-    if (ready) pb.classList.remove("off"); else pb.classList.add("off");
+    var tray=$("tray");
+    if(payState.tray.length===0) tray.innerHTML='<span style="color:#bba700;">Tap coins below to make the price</span>';
+    else { tray.innerHTML=""; for(var i=0;i<payState.tray.length;i++){ var s=document.createElement("span"); s.className="traycoin"; s.textContent=payState.tray[i]; tray.appendChild(s); } }
+    $("trayTotal").textContent=payState.total;
+    var pb=$("payBtn"); if(payState.total===payState.item.price) pb.classList.remove("off"); else pb.classList.add("off");
   }
-  $("undoBtn").onclick = function(){
-    if (!payState || !payState.tray.length) return;
-    var last = payState.tray.pop();
-    payState.total -= last;
-    renderTray();
-  };
-  $("payBtn").onclick = function(){
-    if (!payState) return;
-    if (payState.total !== payState.item.price){
-      if (payState.total < payState.item.price) toast("Add 🪙" + (payState.item.price - payState.total) + " more to make the price");
-      else toast("That's too much — try undo to make exactly 🪙" + payState.item.price);
-      return;
-    }
-    state.coins -= payState.item.price;
-    state.owned[payState.item.id] = (state.owned[payState.item.id] || 0) + 1;
-    save(); refreshCoins();
-    soundGood();
-    toast("Yay! You bought a " + payState.item.name + "! 🎉");
-    show("s-coll"); renderCollection();
+  $("undoBtn").onclick=function(){ if(!payState||!payState.tray.length) return; var last=payState.tray.pop(); payState.total-=last; renderTray(); };
+  $("payBtn").onclick=function(){
+    if(!payState) return;
+    if(payState.total!==payState.item.price){ if(payState.total<payState.item.price) toast("Add 🪙"+(payState.item.price-payState.total)+" more to make the price"); else toast("That's too much — try undo to make exactly 🪙"+payState.item.price); return; }
+    P.coins-=payState.item.price; P.owned[payState.item.id]=(P.owned[payState.item.id]||0)+1; saveStore(); refreshCoins(); soundGood();
+    toast("Yay! You bought a "+payState.item.name+"! 🎉"); show("s-coll"); renderCollection();
   };
 
-  // ---------- Collection ----------
+  // ================= Collection =================
   function renderCollection(){
-    var grid = $("collgrid");
-    grid.innerHTML = "";
-    var any = false;
-    for (var i=0;i<CATALOGUE.length;i++){
-      var item = CATALOGUE[i];
-      var c = state.owned[item.id] || 0;
-      if (c > 0){
-        any = true;
-        var div = document.createElement("div");
-        div.className = "collitem";
-        div.innerHTML = '<div class="tile" style="background:' + item.bg + '"><span>' + item.pic + '</span></div><div class="cnt">' + (c>1?("x"+c):"&nbsp;") + '</div>';
-        grid.appendChild(div);
-      }
-    }
-    if (!any){
-      grid.innerHTML = '<div class="empty">Nothing yet! Play a round, earn coins, and buy your first treasure. ✨</div>';
-    }
+    var grid=$("collgrid"); grid.innerHTML=""; var any=false;
+    for(var i=0;i<CATALOGUE.length;i++){ var item=CATALOGUE[i], c=P.owned[item.id]||0; if(c>0){ any=true; var div=document.createElement("div"); div.className="collitem"; div.innerHTML='<div class="tile" style="background:'+item.bg+'"><span>'+item.pic+'</span></div><div class="cnt">'+(c>1?("x"+c):"&nbsp;")+'</div>'; grid.appendChild(div); } }
+    if(!any) grid.innerHTML='<div class="empty">Nothing yet! Play a round, earn coins, and buy your first treasure. ✨</div>';
   }
 
-  // ---------- Settings ----------
-  function renderSettings(){
-    var row = $("settrow");
-    row.innerHTML = "";
-    for (var t=2;t<=12;t++){
-      (function(tt){
-        var on = state.tables.indexOf(tt) !== -1;
-        var b = document.createElement("button");
-        b.className = "tbtn" + (on?" on":"");
-        b.textContent = tt + "×";
-        b.onclick = function(){
-          var i = state.tables.indexOf(tt);
-          if (i === -1) state.tables.push(tt);
-          else state.tables.splice(i,1);
-          save(); renderSettings();
-        };
-        row.appendChild(b);
-      })(t);
+  // ================= Dress My Star =================
+  var editTab="skin";
+  function renderDress(){
+    $("dressAvatar").innerHTML=avatarSVG(P.avatar);
+    var tabs=$("dressTabs"); tabs.innerHTML="";
+    for(var i=0;i<EDIT_TABS.length;i++){ (function(tb){ var b=document.createElement("button"); b.className="tab"+(editTab===tb.slot?" sel":""); b.textContent=tb.label; b.onclick=function(){ editTab=tb.slot; renderDress(); }; tabs.appendChild(b); })(EDIT_TABS[i]); }
+    var tabDef=null; for(var k=0;k<EDIT_TABS.length;k++){ if(EDIT_TABS[k].slot===editTab) tabDef=EDIT_TABS[k]; }
+    var sw=$("dressSwatches"); sw.innerHTML=""; var opts=OPTIONS[editTab];
+    for(var j=0;j<opts.length;j++){
+      (function(opt){
+        var owned = !opt.price || P.avatarOwned[editTab+":"+opt.id];
+        var selected = P.avatar[editTab]===opt.id;
+        var b=document.createElement("button"); b.className="swatch"+(selected?" sel":"");
+        var inner="";
+        if(tabDef.type==="color"){
+          var colMap = editTab==="skin"?SKIN:(editTab==="hairColor"?HAIRCOL:TOPCOL);
+          inner+='<span class="dot" style="background:'+colMap[opt.id]+'"></span>';
+        } else {
+          inner+='<div style="font-size:15px;min-height:24px;">'+(opt.label||opt.id)+'</div>';
+        }
+        if(!owned) inner+='<span class="lock">🔒 🪙'+opt.price+'</span>';
+        else if(opt.price) inner+='<span class="lock free">Owned</span>';
+        else inner+='<span class="lock free">&nbsp;</span>';
+        b.innerHTML=inner; b.onclick=function(){ selectPart(editTab,opt,tabDef); }; sw.appendChild(b);
+      })(opts[j]);
     }
   }
-  $("resetBtn").onclick = function(){
-    if (window.confirm("Reset all coins and the whole collection? This can't be undone.")){
-      state.coins = 0; state.owned = {};
-      save(); refreshCoins();
-      toast("All reset.");
+  function selectPart(slot,opt,tabDef){
+    var owned = !opt.price || P.avatarOwned[slot+":"+opt.id];
+    if(!owned){
+      if(P.coins<opt.price){ toast("Keep earning — you need 🪙"+(opt.price-P.coins)+" more!"); return; }
+      if(!window.confirm("Unlock "+(opt.label||opt.id)+" for 🪙"+opt.price+"?")) return;
+      P.coins-=opt.price; P.avatarOwned[slot+":"+opt.id]=true; refreshCoins(); coinPop("-"+opt.price+" 🪙"); soundCoin();
     }
+    P.avatar[slot]=opt.id; saveStore(); renderDress();
+  }
+
+  // ================= Settings =================
+  function renderSettings(){
+    var row=$("settrow"); row.innerHTML="";
+    for(var t=2;t<=12;t++){ (function(tt){ var on=P.tables.indexOf(tt)!==-1; var b=document.createElement("button"); b.className="tbtn"+(on?" on":""); b.textContent=tt+"×"; b.onclick=function(){ var i=P.tables.indexOf(tt); if(i===-1) P.tables.push(tt); else P.tables.splice(i,1); saveStore(); renderSettings(); }; row.appendChild(b); })(t); }
+  }
+  $("resetBtn").onclick=function(){ if(window.confirm("Reset "+P.name+"'s coins, collection and star? This can't be undone.")){ var d=defaultProfile(P.name); store.players[P.name]=d; P=d; saveStore(); refreshCoins(); toast("All reset."); renderHome(); show("s-home"); } };
+  $("switchBtn").onclick=function(){ store.current=null; saveStore(); renderLogin(); show("s-login"); $("topbar").style.display="none"; };
+
+  // ================= Home =================
+  function renderHome(){
+    $("homeGreeting").textContent="Hi, "+P.name+"! 👋";
+    $("homeAvatar").innerHTML=avatarSVG(P.avatar);
+    $("dressLabel").textContent="Dress My Star";
+    $("shopLabel").textContent=P.name+"'s Shop";
+    $("collLabel").textContent=P.name+"'s Collection";
+    $("dressTitle").textContent="⭐ "+P.name+"'s Star";
+    $("shopTitle").textContent="🛍️ "+P.name+"'s Shop";
+    $("collTitle").textContent="🏆 "+P.name+"'s Collection";
+  }
+
+  // ================= Login =================
+  function renderLogin(){
+    var list=$("playerList"); list.innerHTML=""; var names=[]; for(var n in store.players){ if(store.players.hasOwnProperty(n)) names.push(n); }
+    for(var i=0;i<names.length;i++){ (function(name){ var p=store.players[name]; var b=document.createElement("button"); b.className="player-btn"; b.innerHTML=name+' <span class="pcoins">🪙 '+p.coins+'</span>'; b.onclick=function(){ enterProfile(name); }; list.appendChild(b); })(names[i]); }
+    $("newPlayerBox").style.display="none"; $("nameInput").value="";
+  }
+  function enterProfile(name){
+    P=store.players[name]; if(!P.avatarOwned) P.avatarOwned={}; if(!P.avatar) P.avatar=defaultProfile(name).avatar;
+    store.current=name; saveStore(); $("topbar").style.display="flex"; refreshCoins(); renderHome(); show("s-home");
+  }
+  $("showNewPlayer").onclick=function(){ $("newPlayerBox").style.display="block"; $("nameInput").focus(); };
+  $("createPlayer").onclick=function(){
+    var name=($("nameInput").value||"").trim(); if(!name){ toast("Type a name first!"); return; }
+    if(store.players[name]){ enterProfile(name); return; }
+    store.players[name]=defaultProfile(name); P=store.players[name]; store.current=name; saveStore();
+    $("topbar").style.display="flex"; refreshCoins(); renderHome();
+    renderDress(); show("s-dress"); toast("Welcome, "+name+"! Make your star ⭐");
   };
 
-  // ---------- Navigation wiring ----------
-  $("goPlay").onclick = function(){ show("s-rounds"); };
-  $("goShop").onclick = function(){ renderShop(); show("s-shop"); };
-  $("goColl").onclick = function(){ renderCollection(); show("s-coll"); };
-  $("gearBtn").onclick = function(){ renderSettings(); show("s-set"); };
+  // ================= Navigation =================
+  $("goPlay").onclick=function(){ show("s-rounds"); };
+  $("goDress").onclick=function(){ editTab="skin"; renderDress(); show("s-dress"); };
+  $("goShop").onclick=function(){ renderShop(); show("s-shop"); };
+  $("goColl").onclick=function(){ renderCollection(); show("s-coll"); };
+  $("gearBtn").onclick=function(){ renderSettings(); show("s-set"); };
+  var roundBtns=document.querySelectorAll("[data-round]");
+  for(var i=0;i<roundBtns.length;i++){ (function(b){ b.onclick=function(){ startRound(b.getAttribute("data-round")); }; })(roundBtns[i]); }
+  var goBtns=document.querySelectorAll("[data-go]");
+  for(var k=0;k<goBtns.length;k++){ (function(b){ b.onclick=function(){ var dest=b.getAttribute("data-go"); if(dest==="home"){ renderHome(); show("s-home"); } else if(dest==="rounds") show("s-rounds"); else if(dest==="dress"){ editTab="skin"; renderDress(); show("s-dress"); } else if(dest==="shop"){ renderShop(); show("s-shop"); } else if(dest==="coll"){ renderCollection(); show("s-coll"); } }; })(goBtns[k]); }
 
-  var roundBtns = document.querySelectorAll("[data-round]");
-  for (var i=0;i<roundBtns.length;i++){
-    (function(b){ b.onclick = function(){ startRound(b.getAttribute("data-round")); }; })(roundBtns[i]);
-  }
-
-  var goBtns = document.querySelectorAll("[data-go]");
-  for (var k=0;k<goBtns.length;k++){
-    (function(b){
-      b.onclick = function(){
-        var dest = b.getAttribute("data-go");
-        if (dest === "home") show("s-home");
-        else if (dest === "rounds") show("s-rounds");
-        else if (dest === "shop"){ renderShop(); show("s-shop"); }
-        else if (dest === "coll"){ renderCollection(); show("s-coll"); }
-      };
-    })(goBtns[k]);
-  }
-
-  // ---------- Init ----------
-  refreshCoins();
-  show("s-home");
+  // ================= Init =================
+  if(store.current && store.players[store.current]) enterProfile(store.current);
+  else { renderLogin(); show("s-login"); }
 
 })();
 </script>
