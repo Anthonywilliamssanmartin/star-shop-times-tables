@@ -1083,7 +1083,7 @@
   }
   function nextSum(){
     if(stepsState.idx>=stepsState.total){ endSteps(); return; }
-    stepsState.sum=genSum(stepsState.op); stepsState.step=0; stepsState.sel={}; stepLock=false;
+    stepsState.sum=genSum(stepsState.op); stepsState.step=0; stepsState.sel={}; stepsState.sumEarned=0; stepLock=false;
     $("stepProgress").textContent="Sum "+(stepsState.idx+1)+" of "+stepsState.total;
     $("working").innerHTML=""; renderStep();
   }
@@ -1101,9 +1101,10 @@
     if(stepsState.sel[key]) return;
     stepsState.sel[key]=true; soundCoin(); $("stepFb").textContent="";
     var s=stepsState.sum, both=(want==="o")?(stepsState.sel.ao&&stepsState.sel.bo):(stepsState.sel.at&&stepsState.sel.bt);
-    if(both){ stepLock=true; var d=document.createElement("div"); d.textContent="✓ the "+(want==="o"?"ones":"tens")+" are "+(want==="o"?(s.aO+" and "+s.bO):(s.aT+" and "+s.bT)); $("working").appendChild(d); stepsState.step++; setTimeout(function(){ renderStep(); },520); }
+    if(both){ stepLock=true; awardStep(2); var d=document.createElement("div"); d.textContent="✓ the "+(want==="o"?"ones":"tens")+" are "+(want==="o"?(s.aO+" and "+s.bO):(s.aT+" and "+s.bT)); $("working").appendChild(d); stepsState.step++; setTimeout(function(){ renderStep(); },520); }
     else renderBigSum(tapPlace);
   }
+  function awardStep(n){ P.coins+=n; stepsState.earned+=n; stepsState.sumEarned+=n; refreshCoins(); saveStore(); coinPop("+"+n+" 🪙"); }
   function stepOptions(ans, isTensVal){
     var set={}; set[ans]=true; var o=[ans], guard=0;
     while(o.length<4 && guard<40){ guard++; var d = isTensVal?(ans+pick([-20,-10,10,20,9,-9])):(ans+pick([-2,-1,1,2,3,-3,10,-10])); if(d>=0 && !set[d]){ set[d]=true; o.push(d); } }
@@ -1135,9 +1136,10 @@
       else if(st==="zero") line="that's "+s.tensV;
       else line="answer: "+s.tensV+" + "+s.ones+" = "+s.total;
       var d=document.createElement("div"); d.textContent="✓ "+line; $("working").appendChild(d);
+      awardStep(st==="total"?5:3);
       stepsState.step++;
       setTimeout(function(){ stepLock=false;
-        if(stepsState.step>=STEP_SEQ.length){ stepsState.idx++; stepsState.earned+=15; P.coins+=15; refreshCoins(); saveStore(); coinPop("+15 🪙"); soundStreak(); speak(pick(["Brilliant!","Well done!","You did the whole sum!"])); showSumDone(); }
+        if(stepsState.step>=STEP_SEQ.length){ stepsState.idx++; soundStreak(); speak(pick(["Brilliant!","Well done!","You did the whole sum!"])); showSumDone(); }
         else renderStep();
       }, 540);
     } else {
@@ -1150,7 +1152,7 @@
   function showSumDone(){
     var s=stepsState.sum, sign=stepsState.op==="add"?"+":"−";
     $("stepPrompt").innerHTML='<span style="color:#2ecc71;font-weight:900;">'+s.a+" "+sign+" "+s.b+" = "+s.total+'</span> 🎉';
-    $("stepFb").textContent="+15 coins! Read it through, then carry on.";
+    $("stepFb").textContent="+"+stepsState.sumEarned+" coins this sum! Read it through, then carry on.";
     $("stepFb").style.color="#2a8f5a";
     var box=$("stepOpts"); box.className=""; box.innerHTML="";
     var btn=document.createElement("button"); btn.className="btn b-pay"; btn.style.margin="0";
