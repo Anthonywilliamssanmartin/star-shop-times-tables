@@ -50,6 +50,11 @@
   .b-bigger { background: #9b5de5; }
   .b-story { background: #ff8c42; }
   .b-learn { background: #00b8a9; }
+  .b-step { background: #16b87a; }
+  .b-step2 { background: #3a8ee6; }
+  .bigsum { font-size: 40px; font-weight: 800; text-align: center; color: #3a2168; margin-bottom: 10px; }
+  .working { background: #f4eeff; border-radius: 14px; padding: 8px 14px; min-height: 30px; margin-bottom: 8px; font-size: 17px; font-weight: 700; color: #6a3093; }
+  .working div { margin: 3px 0; }
   .learnbar { text-align: center; font-size: 22px; line-height: 1.5; margin-bottom: 12px; }
   .learnbar .star { margin: 0 1px; opacity: 0.28; }
   .learnbar .star.lit { opacity: 1; }
@@ -257,8 +262,23 @@
     <button class="btn b-quick" data-round="quick"><span class="em">⚡</span>Quickfire<small>Mixed tables · 🪙3 each</small></button>
     <button class="btn b-bigger" data-round="bigger"><span class="em">⚖️</span>Which is Bigger?<small>Tap the bigger answer · 🪙3 each</small></button>
     <button class="btn b-story" data-round="story"><span class="em">📖</span>Story Questions<small>Tricky word problems · 🪙5 each</small></button>
+    <button class="btn b-step" data-step="add"><span class="em">➕</span>Step-by-Step Adding<small>Ones → tens → add the zero → together</small></button>
+    <button class="btn b-step2" data-step="sub"><span class="em">➖</span>Step-by-Step Taking Away<small>Build the answer one step at a time</small></button>
     <button class="btn b-learn" id="goLearn" style="display:none;"><span class="em">🔓</span><span id="learnLabel">Learn a new table!</span><small>Unlock the next table &amp; win 🪙30</small></button>
     <button class="btn b-back" data-go="home">⬅ Back</button>
+  </div>
+
+  <!-- STEP-BY-STEP SUMS -->
+  <div class="screen" id="s-steps">
+    <div class="progress" id="stepProgress">Sum 1 of 5</div>
+    <div class="card">
+      <div class="bigsum" id="bigSum">34 + 25</div>
+      <div class="working" id="working"></div>
+      <div class="qtext" id="stepPrompt" style="font-size:23px;margin:8px 0 18px;">Start with the ones…</div>
+      <div class="feedback" id="stepFb"></div>
+      <div class="opts" id="stepOpts"></div>
+    </div>
+    <button class="btn b-back" data-go="rounds">⬅ Back</button>
   </div>
 
   <!-- LEARN A NEW TABLE -->
@@ -969,6 +989,62 @@
     updateLearnButton(); show("s-rounds");
   }
 
+  // ----- Step-by-step sums (ones -> tens -> add the zero -> together) -----
+  var STEPS_PER=5, stepsState=null, stepLock=false;
+  function startSteps(op){ stepsState={ op:op, idx:0, total:STEPS_PER, earned:0 }; nextSum(); show("s-steps"); }
+  function genSum(op){
+    if(op==="add"){ var aT=rint(1,8), bT=rint(1,9-aT), aO=rint(0,9), bO=rint(0,9-aO); var a=aT*10+aO, b=bT*10+bO; return {a:a,b:b,aT:aT,aO:aO,bT:bT,bO:bO,ones:aO+bO,tensD:aT+bT,tensV:(aT+bT)*10,total:a+b}; }
+    var AT=rint(2,9), BT=rint(1,AT-1), AO=rint(0,9), BO=rint(0,AO); var A=AT*10+AO, B=BT*10+BO; return {a:A,b:B,aT:AT,aO:AO,bT:BT,bO:BO,ones:AO-BO,tensD:AT-BT,tensV:(AT-BT)*10,total:A-B};
+  }
+  function nextSum(){
+    if(stepsState.idx>=stepsState.total){ endSteps(); return; }
+    stepsState.sum=genSum(stepsState.op); stepsState.step=0; stepLock=false;
+    $("stepProgress").textContent="Sum "+(stepsState.idx+1)+" of "+stepsState.total;
+    $("bigSum").textContent=stepsState.sum.a+(stepsState.op==="add"?" + ":" − ")+stepsState.sum.b;
+    $("working").innerHTML=""; renderStep();
+  }
+  function stepOptions(ans, st){
+    var set={}; set[ans]=true; var o=[ans], guard=0;
+    while(o.length<4 && guard<40){ guard++; var d = (st===2)?(ans+pick([-20,-10,10,20,9,-9])):(ans+pick([-2,-1,1,2,3,-3,10,-10])); if(d>=0 && !set[d]){ set[d]=true; o.push(d); } }
+    while(o.length<4){ var f=ans+o.length+1; if(!set[f]){ set[f]=true; o.push(f); } }
+    return shuffle(o);
+  }
+  function renderStep(){
+    var s=stepsState.sum, sign=stepsState.op==="add"?"+":"−", st=stepsState.step, prompt, ans;
+    if(st===0){ prompt="Start with the ones: "+s.aO+" "+sign+" "+s.bO+" = ?"; ans=s.ones; }
+    else if(st===1){ prompt="Now the tens: "+s.aT+" "+sign+" "+s.bT+" = ? tens"; ans=s.tensD; }
+    else if(st===2){ prompt="Add the zero: "+s.tensD+" tens = ?"; ans=s.tensV; }
+    else { prompt="Bring it together: "+s.tensV+" + "+s.ones+" = ?"; ans=s.total; }
+    stepsState.curAns=ans;
+    $("stepPrompt").textContent=prompt; $("stepFb").textContent=""; $("stepFb").style.color="";
+    var box=$("stepOpts"); box.className="opts"; box.innerHTML=""; var opts=stepOptions(ans, st);
+    for(var i=0;i<opts.length;i++){ (function(v){ var b=document.createElement("button"); b.className="opt"; b.textContent=v; b.onclick=function(){ stepAnswer(v,b); }; box.appendChild(b); })(opts[i]); }
+  }
+  function stepAnswer(v,btn){
+    if(stepLock) return; stepLock=true;
+    var s=stepsState.sum, sign=stepsState.op==="add"?"+":"−";
+    if(v===stepsState.curAns){
+      btn.classList.add("good"); soundGood();
+      var line;
+      if(stepsState.step===0) line="ones: "+s.aO+" "+sign+" "+s.bO+" = "+s.ones;
+      else if(stepsState.step===1) line="tens: "+s.aT+" "+sign+" "+s.bT+" = "+s.tensD+" tens";
+      else if(stepsState.step===2) line="that's "+s.tensV;
+      else line="answer: "+s.tensV+" + "+s.ones+" = "+s.total;
+      var d=document.createElement("div"); d.textContent="✓ "+line; $("working").appendChild(d);
+      stepsState.step++;
+      setTimeout(function(){ stepLock=false;
+        if(stepsState.step>3){ stepsState.idx++; stepsState.earned+=5; P.coins+=5; refreshCoins(); saveStore(); coinPop("+5 🪙"); if(stepsState.idx>=stepsState.total) endSteps(); else { speak(pick(["Great!","Well done!","Nice one!"])); nextSum(); } }
+        else renderStep();
+      }, 540);
+    } else {
+      btn.classList.add("bad"); soundBad();
+      var all=$("stepOpts").querySelectorAll(".opt"); for(var i=0;i<all.length;i++){ if(all[i].textContent==stepsState.curAns) all[i].classList.add("good"); }
+      $("stepFb").textContent="Almost! It's "+stepsState.curAns; $("stepFb").style.color="#c0392b";
+      setTimeout(function(){ stepLock=false; renderStep(); }, 1100);
+    }
+  }
+  function endSteps(){ soundStreak(); speak("Brilliant work!"); toast("🎉 Done! You earned "+stepsState.earned+" coins"); show("s-rounds"); }
+
   // ================= Shop =================
   function renderShop(){
     $("shopSub").textContent="You have 🪙"+P.coins+" to spend";
@@ -1180,6 +1256,8 @@
   $("gearBtn").onclick=function(){ renderSettings(); show("s-set"); };
   var roundBtns=document.querySelectorAll("[data-round]");
   for(var i=0;i<roundBtns.length;i++){ (function(b){ b.onclick=function(){ startRound(b.getAttribute("data-round")); }; })(roundBtns[i]); }
+  var stepBtns=document.querySelectorAll("[data-step]");
+  for(var si=0;si<stepBtns.length;si++){ (function(b){ b.onclick=function(){ startSteps(b.getAttribute("data-step")); }; })(stepBtns[si]); }
   var goBtns=document.querySelectorAll("[data-go]");
   for(var k=0;k<goBtns.length;k++){ (function(b){ b.onclick=function(){ var dest=b.getAttribute("data-go"); if(dest==="home"){ renderHome(); show("s-home"); } else if(dest==="rounds"){ updateLearnButton(); show("s-rounds"); } else if(dest==="dress"){ editTab="skin"; renderDress(); show("s-dress"); } else if(dest==="shop"){ renderShop(); show("s-shop"); } else if(dest==="pets"){ renderPets(); show("s-pets"); } else if(dest==="coll"){ renderCollection(); show("s-coll"); } }; })(goBtns[k]); }
 
