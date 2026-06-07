@@ -53,6 +53,12 @@
   .b-step { background: #16b87a; }
   .b-step2 { background: #3a8ee6; }
   .bigsum { font-size: 40px; font-weight: 800; text-align: center; color: #3a2168; margin-bottom: 10px; }
+  .bigsum .digit { display: inline-block; min-width: 30px; padding: 4px 6px; margin: 0 1px; border-radius: 10px; }
+  .bigsum .digit.tappable { background: #ece1ff; box-shadow: 0 4px 0 rgba(0,0,0,0.14); cursor: pointer; }
+  .bigsum .digit.tappable:active { transform: translateY(2px); box-shadow: 0 2px 0 rgba(0,0,0,0.14); }
+  .bigsum .digit.sel-ones { background: #2ecc71; color: #fff; }
+  .bigsum .digit.sel-tens { background: #3a8ee6; color: #fff; }
+  .bigsum .op { margin: 0 8px; }
   .working { background: #f4eeff; border-radius: 14px; padding: 8px 14px; min-height: 30px; margin-bottom: 8px; font-size: 17px; font-weight: 700; color: #6a3093; }
   .working div { margin: 3px 0; }
   .learnbar { text-align: center; font-size: 22px; line-height: 1.5; margin-bottom: 12px; }
@@ -991,6 +997,7 @@
 
   // ----- Step-by-step sums (ones -> tens -> add the zero -> together) -----
   var STEPS_PER=5, stepsState=null, stepLock=false;
+  var STEP_SEQ=["selOnes","ones","selTens","tens","zero","total"];
   function startSteps(op){ stepsState={ op:op, idx:0, total:STEPS_PER, earned:0 }; nextSum(); show("s-steps"); }
   function genSum(op){
     if(op==="add"){ var aT=rint(1,8), bT=rint(1,9-aT), aO=rint(0,9), bO=rint(0,9-aO); var a=aT*10+aO, b=bT*10+bO; return {a:a,b:b,aT:aT,aO:aO,bT:bT,bO:bO,ones:aO+bO,tensD:aT+bT,tensV:(aT+bT)*10,total:a+b}; }
@@ -998,42 +1005,61 @@
   }
   function nextSum(){
     if(stepsState.idx>=stepsState.total){ endSteps(); return; }
-    stepsState.sum=genSum(stepsState.op); stepsState.step=0; stepLock=false;
+    stepsState.sum=genSum(stepsState.op); stepsState.step=0; stepsState.sel={}; stepLock=false;
     $("stepProgress").textContent="Sum "+(stepsState.idx+1)+" of "+stepsState.total;
-    $("bigSum").textContent=stepsState.sum.a+(stepsState.op==="add"?" + ":" − ")+stepsState.sum.b;
     $("working").innerHTML=""; renderStep();
   }
-  function stepOptions(ans, st){
+  function renderBigSum(tapPlace){
+    var s=stepsState.sum, sign=stepsState.op==="add"?" + ":" − ";
+    function dig(val,place,num){ var k=num+place, sel=stepsState.sel[k], cls="digit"; if(sel) cls+=(place==="o"?" sel-ones":" sel-tens"); var tap=(tapPlace==="selOnes"||tapPlace==="selTens")&&!sel; if(tap) cls+=" tappable"; return '<span class="'+cls+'" data-k="'+k+'" data-tap="'+(tap?1:0)+'">'+val+'</span>'; }
+    var el=$("bigSum"); el.innerHTML=dig(s.aT,"t","a")+dig(s.aO,"o","a")+'<span class="op">'+sign+'</span>'+dig(s.bT,"t","b")+dig(s.bO,"o","b");
+    var taps=el.querySelectorAll('.digit[data-tap="1"]');
+    for(var i=0;i<taps.length;i++){ (function(d){ d.onclick=function(){ pickDigit(d.getAttribute("data-k"), tapPlace); }; })(taps[i]); }
+  }
+  function pickDigit(key, tapPlace){
+    if(stepLock) return;
+    var place=key.charAt(1), want=(tapPlace==="selOnes")?"o":"t";
+    if(place!==want){ $("stepFb").textContent="That's a "+(place==="t"?"ten":"one")+" — tap the "+(want==="o"?"ones":"tens")+"!"; $("stepFb").style.color="#c0392b"; soundBad(); return; }
+    if(stepsState.sel[key]) return;
+    stepsState.sel[key]=true; soundCoin(); $("stepFb").textContent="";
+    var s=stepsState.sum, both=(want==="o")?(stepsState.sel.ao&&stepsState.sel.bo):(stepsState.sel.at&&stepsState.sel.bt);
+    if(both){ stepLock=true; var d=document.createElement("div"); d.textContent="✓ the "+(want==="o"?"ones":"tens")+" are "+(want==="o"?(s.aO+" and "+s.bO):(s.aT+" and "+s.bT)); $("working").appendChild(d); stepsState.step++; setTimeout(function(){ renderStep(); },520); }
+    else renderBigSum(tapPlace);
+  }
+  function stepOptions(ans, isTensVal){
     var set={}; set[ans]=true; var o=[ans], guard=0;
-    while(o.length<4 && guard<40){ guard++; var d = (st===2)?(ans+pick([-20,-10,10,20,9,-9])):(ans+pick([-2,-1,1,2,3,-3,10,-10])); if(d>=0 && !set[d]){ set[d]=true; o.push(d); } }
+    while(o.length<4 && guard<40){ guard++; var d = isTensVal?(ans+pick([-20,-10,10,20,9,-9])):(ans+pick([-2,-1,1,2,3,-3,10,-10])); if(d>=0 && !set[d]){ set[d]=true; o.push(d); } }
     while(o.length<4){ var f=ans+o.length+1; if(!set[f]){ set[f]=true; o.push(f); } }
     return shuffle(o);
   }
   function renderStep(){
-    var s=stepsState.sum, sign=stepsState.op==="add"?"+":"−", st=stepsState.step, prompt, ans;
-    if(st===0){ prompt="Start with the ones: "+s.aO+" "+sign+" "+s.bO+" = ?"; ans=s.ones; }
-    else if(st===1){ prompt="Now the tens: "+s.aT+" "+sign+" "+s.bT+" = ? tens"; ans=s.tensD; }
-    else if(st===2){ prompt="Add the zero: "+s.tensD+" tens = ?"; ans=s.tensV; }
+    stepLock=false;
+    var st=STEP_SEQ[stepsState.step], s=stepsState.sum, sign=stepsState.op==="add"?"+":"−";
+    renderBigSum(st); $("stepFb").textContent=""; $("stepFb").style.color="";
+    if(st==="selOnes"||st==="selTens"){ $("stepPrompt").textContent=(st==="selOnes"?"👇 Tap the ONES in both numbers":"👆 Now tap the TENS in both numbers"); $("stepOpts").innerHTML=""; return; }
+    var prompt, ans, isTensVal=false;
+    if(st==="ones"){ prompt="Add the ones: "+s.aO+" "+sign+" "+s.bO+" = ?"; ans=s.ones; }
+    else if(st==="tens"){ prompt="Add the tens: "+s.aT+" "+sign+" "+s.bT+" = ? tens"; ans=s.tensD; }
+    else if(st==="zero"){ prompt="Add the zero: "+s.tensD+" tens = ?"; ans=s.tensV; isTensVal=true; }
     else { prompt="Bring it together: "+s.tensV+" + "+s.ones+" = ?"; ans=s.total; }
-    stepsState.curAns=ans;
-    $("stepPrompt").textContent=prompt; $("stepFb").textContent=""; $("stepFb").style.color="";
-    var box=$("stepOpts"); box.className="opts"; box.innerHTML=""; var opts=stepOptions(ans, st);
+    stepsState.curAns=ans; $("stepPrompt").textContent=prompt;
+    var box=$("stepOpts"); box.className="opts"; box.innerHTML=""; var opts=stepOptions(ans, isTensVal);
     for(var i=0;i<opts.length;i++){ (function(v){ var b=document.createElement("button"); b.className="opt"; b.textContent=v; b.onclick=function(){ stepAnswer(v,b); }; box.appendChild(b); })(opts[i]); }
   }
   function stepAnswer(v,btn){
     if(stepLock) return; stepLock=true;
-    var s=stepsState.sum, sign=stepsState.op==="add"?"+":"−";
+    var s=stepsState.sum, sign=stepsState.op==="add"?"+":"−", st=STEP_SEQ[stepsState.step];
     if(v===stepsState.curAns){
       btn.classList.add("good"); soundGood();
       var line;
-      if(stepsState.step===0) line="ones: "+s.aO+" "+sign+" "+s.bO+" = "+s.ones;
-      else if(stepsState.step===1) line="tens: "+s.aT+" "+sign+" "+s.bT+" = "+s.tensD+" tens";
-      else if(stepsState.step===2) line="that's "+s.tensV;
+      if(st==="ones") line="ones: "+s.aO+" "+sign+" "+s.bO+" = "+s.ones;
+      else if(st==="tens") line="tens: "+s.aT+" "+sign+" "+s.bT+" = "+s.tensD+" tens";
+      else if(st==="zero") line="that's "+s.tensV;
       else line="answer: "+s.tensV+" + "+s.ones+" = "+s.total;
       var d=document.createElement("div"); d.textContent="✓ "+line; $("working").appendChild(d);
       stepsState.step++;
       setTimeout(function(){ stepLock=false;
-        if(stepsState.step>3){ stepsState.idx++; stepsState.earned+=5; P.coins+=5; refreshCoins(); saveStore(); coinPop("+5 🪙"); if(stepsState.idx>=stepsState.total) endSteps(); else { speak(pick(["Great!","Well done!","Nice one!"])); nextSum(); } }
+        if(stepsState.step>=STEP_SEQ.length){ stepsState.idx++; stepsState.earned+=5; P.coins+=5; refreshCoins(); saveStore(); coinPop("+5 🪙"); if(stepsState.idx>=stepsState.total) endSteps(); else { speak(pick(["Great!","Well done!","Nice one!"])); nextSum(); } }
         else renderStep();
       }, 540);
     } else {
