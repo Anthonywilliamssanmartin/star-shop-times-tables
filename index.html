@@ -59,8 +59,11 @@
   .bigsum .digit.sel-ones { background: #2ecc71; color: #fff; }
   .bigsum .digit.sel-tens { background: #3a8ee6; color: #fff; }
   .bigsum .op { margin: 0 8px; }
-  .working { background: #f4eeff; border-radius: 14px; padding: 8px 14px; min-height: 30px; margin-bottom: 8px; font-size: 17px; font-weight: 700; color: #6a3093; }
-  .working div { margin: 3px 0; }
+  .working { background: #effaf1; border: 2px solid #b8e6c0; border-radius: 16px; padding: 4px 14px; min-height: 26px; margin-bottom: 10px; }
+  .working div { font-size: 18px; font-weight: 800; color: #2a8f5a; padding: 7px 2px; }
+  .working div + div { border-top: 1px dashed #cfe9d4; }
+  .hl-ones { color: #2ecc71; font-size: 1.18em; }
+  .hl-tens { color: #3a8ee6; font-size: 1.18em; }
   .learnbar { text-align: center; font-size: 22px; line-height: 1.5; margin-bottom: 12px; }
   .learnbar .star { margin: 0 1px; opacity: 0.28; }
   .learnbar .star.lit { opacity: 1; }
@@ -192,6 +195,11 @@
   .scene-fg { position: absolute; left: 0; top: 0; right: 0; bottom: 0; z-index: 5; pointer-events: none; }
   .scene-fg svg { width: 100%; height: 100%; display: block; }
   .scene-avatar { position: absolute; left: 50%; bottom: 7%; width: 37%; transform: translateX(-50%); z-index: 4; animation: s-bob 2.6s ease-in-out infinite; }
+  .scene-friend { position: absolute; right: 11%; bottom: 9%; width: 21%; z-index: 4; }
+  .scene-friend svg { width: 100%; height: auto; display: block; }
+  .plane { position: absolute; top: 13%; left: -22%; width: 64px; z-index: 6; animation: s-fly 7s linear infinite; }
+  .plane svg { width: 100%; height: auto; display: block; }
+  @keyframes s-fly { 0%{ transform: translateX(0);} 100%{ transform: translateX(980px);} }
   .scene-avatar svg { width: 100%; height: auto; display: block; position: relative; z-index: 1; }
   .ava-glow { position: absolute; left: 50%; top: 24%; width: 150%; height: 82%; transform: translateX(-50%); background: radial-gradient(circle, rgba(255,233,138,0.7), rgba(255,233,138,0)); z-index: 0; animation: s-glow 2s ease-in-out infinite; }
   .beam { position: absolute; top: -8%; width: 16%; height: 86%; background: linear-gradient(to bottom, rgba(255,255,255,0.35), rgba(255,255,255,0)); transform-origin: top center; pointer-events: none; z-index: 2; }
@@ -467,6 +475,7 @@
     { key:"dresses", name:"👑 Dream Dresses" },
     { key:"squish",  name:"🧸 Squish Pets" },
     { key:"popstar", name:"🎤 Pop Star" },
+    { key:"trips",   name:"✈️ Dream Trips with the Stars" },
     { key:"magic",   name:"🔮 Magic" },
     { key:"treats",  name:"🍩 Treats & Days Out" }
   ];
@@ -512,7 +521,20 @@
     { id:"sq_panda", cat:"squish", pic:"🐼", name:"Panda Squish",   price:85,  petType:"panda",   bg:"linear-gradient(145deg,#ffffff,#dfe3e8)", desc:"A roly-poly panda Squish pet." },
     { id:"sq_axo",   cat:"squish", pic:"🩷", name:"Axolotl Squish", price:95,  petType:"axolotl", bg:"linear-gradient(145deg,#ffd6e8,#ff8fc0)", desc:"A frilly pink axolotl — so squishy!" },
     { id:"sq_dragon",cat:"squish", pic:"🐉", name:"Dragon Squish",  price:115, petType:"dragon",  bg:"linear-gradient(145deg,#c6f5c0,#8fe28f)", desc:"A baby dragon Squish pet with tiny wings." },
-    { id:"sq_uni",   cat:"squish", pic:"🦄", name:"Unicorn Squish", price:140, petType:"unicorn", bg:"linear-gradient(145deg,#ffd6ec,#ffb3e0)", desc:"A magical unicorn Squish pet with a golden horn." }
+    { id:"sq_uni",   cat:"squish", pic:"🦄", name:"Unicorn Squish", price:140, petType:"unicorn", bg:"linear-gradient(145deg,#ffd6ec,#ffb3e0)", desc:"A magical unicorn Squish pet with a golden horn." },
+
+    // --- More treats & cool kit ---
+    { id:"hiphop",   cat:"fashion", pic:"👟", name:"Hip-hop trainers",  price:35, bg:"linear-gradient(145deg,#c2c2ff,#6a5acd)", desc:"Fresh hip-hop trainers — the coolest kicks!" },
+    { id:"headphones",cat:"treats", pic:"🎧", name:"Headphones",        price:45, bg:"linear-gradient(145deg,#ffb3d1,#d63a8f)", desc:"Big bright headphones for your tunes." },
+    { id:"skates",   cat:"treats",  pic:"🛼", name:"Roller skates",     price:50, bg:"linear-gradient(145deg,#ffd6e8,#ff7ab8)", desc:"Zoom around on shiny roller skates!" },
+    { id:"board",    cat:"treats",  pic:"🛹", name:"Skateboard",        price:55, bg:"linear-gradient(145deg,#aef0c0,#34b37a)", desc:"Kickflips on your very own skateboard." },
+    { id:"watch",    cat:"treats",  pic:"⌚", name:"Smart watch",       price:70, bg:"linear-gradient(145deg,#cdd6e6,#6a7a99)", desc:"A smart watch just like a grown-up's." },
+
+    // --- Dream Trips with the Stars (worth 400 each!) ---
+    { id:"trip_tokyo", cat:"trips", pic:"🗼", name:"Tokyo with Taylor",        price:400, scene:"travel", place:"tokyo",  bg:"linear-gradient(145deg,#ffd6ec,#7fb8e6)", desc:"Fly to Tokyo, Japan on tour with Taylor Swift!" },
+    { id:"trip_la",    cat:"trips", pic:"🌴", name:"Los Angeles with Taylor",  price:400, scene:"travel", place:"la",     bg:"linear-gradient(145deg,#ffe7a8,#8fd0ff)", desc:"Jet off to Los Angeles with Taylor Swift!" },
+    { id:"trip_syd",   cat:"trips", pic:"🌉", name:"Sydney with Taylor",       price:400, scene:"travel", place:"sydney", bg:"linear-gradient(145deg,#bfe3ff,#5a8fd6)", desc:"Fly to Sydney, Australia with Taylor Swift!" },
+    { id:"trip_rio",   cat:"trips", pic:"⛰️", name:"Rio with Taylor",          price:400, scene:"travel", place:"rio",    bg:"linear-gradient(145deg,#ffd0a0,#ff8fb0)", desc:"Fly to Rio de Janeiro, Brazil with Taylor Swift!" }
   ];
 
   // ================= Squish Pets data =================
@@ -791,8 +813,63 @@
     }
     return '';
   }
+  function planeSVG(){ return '<svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><g fill="#eef2f7" stroke="#b9c6dc" stroke-width="1"><path d="M6 20 Q4 16 8 16 L58 15 Q74 15 78 20 Q74 25 58 25 L8 24 Q4 24 6 20 Z"/><path d="M28 17 L16 3 L25 3 L44 16 Z"/><path d="M28 23 L16 37 L25 37 L44 24 Z"/><path d="M58 15 L70 6 L73 10 L66 17 Z"/></g><circle cx="34" cy="20" r="2.3" fill="#9cc2e8"/><circle cx="44" cy="20" r="2.3" fill="#9cc2e8"/></svg>'; }
+  function starFriendSVG(){ return '<svg viewBox="0 0 100 170" xmlns="http://www.w3.org/2000/svg">'
+    +'<path d="M30 168 Q26 96 50 88 Q74 96 70 168 Z" fill="#ffcf57"/>'
+    +'<g fill="#fff" opacity="0.85"><circle cx="44" cy="120" r="2"/><circle cx="56" cy="132" r="2"/><circle cx="50" cy="108" r="1.6"/></g>'
+    +'<path d="M26 66 Q22 122 42 128 L58 128 Q78 122 74 66 Z" fill="#f0c75e"/>'
+    +'<rect x="44" y="80" width="12" height="14" fill="#f1c27d"/>'
+    +'<circle cx="50" cy="62" r="22" fill="#f1c27d"/>'
+    +'<path d="M28 60 Q28 34 50 32 Q72 34 72 60 Q66 46 50 48 Q34 46 28 60 Z" fill="#f0c75e"/>'
+    +'<rect x="37" y="58" width="11" height="7" rx="2" fill="#222"/><rect x="52" y="58" width="11" height="7" rx="2" fill="#222"/><rect x="48" y="60" width="4" height="2" fill="#222"/>'
+    +'<path d="M44 73 Q50 79 56 73" stroke="#c0392b" fill="none" stroke-width="2" stroke-linecap="round"/>'
+    +'<line x1="70" y1="92" x2="82" y2="76" stroke="#555" stroke-width="3" stroke-linecap="round"/><circle cx="84" cy="73" r="5.5" fill="#777"/>'
+    +'<path d="M50 6 l3 7 7 1 -5 5 1 7 -6 -3 -6 3 1 -7 -5 -5 7 -1 z" fill="#ffd23f"/>'
+    +'</svg>'; }
+  function travelBG(place){
+    var s='<svg viewBox="0 0 320 240" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">';
+    if(place==="tokyo"){
+      s+='<defs><linearGradient id="tsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd9ec"/><stop offset="1" stop-color="#bfe3ff"/></linearGradient></defs><rect width="320" height="240" fill="url(#tsky)"/>';
+      s+='<path d="M40 210 L160 70 L280 210 Z" fill="#e3ecf7"/><path d="M160 70 L132 110 Q160 100 188 110 Z" fill="#fff"/>';
+      s+='<g fill="#d83b3b"><rect x="36" y="150" width="9" height="64"/><rect x="86" y="150" width="9" height="64"/><rect x="26" y="144" width="79" height="9"/><rect x="32" y="160" width="67" height="6"/></g>';
+      s+='<g fill="#ffb3d1"><circle cx="250" cy="58" r="10"/><circle cx="266" cy="70" r="9"/><circle cx="240" cy="74" r="8"/><circle cx="258" cy="82" r="8"/></g>';
+      s+='<rect y="210" width="320" height="30" fill="#9ec48a"/>';
+    } else if(place==="la"){
+      s+='<defs><linearGradient id="lsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe7a8"/><stop offset="1" stop-color="#8fd0ff"/></linearGradient></defs><rect width="320" height="240" fill="url(#lsky)"/>';
+      s+='<circle cx="255" cy="56" r="32" fill="#ffd23f"/>';
+      s+='<path d="M0 200 Q160 150 320 200 L320 240 L0 240 Z" fill="#c7ad7a"/>';
+      s+='<text x="112" y="150" font-family="Helvetica,Arial" font-size="26" font-weight="800" fill="#fff" stroke="#cbb88a" stroke-width="1">L.A.</text>';
+      s+='<g><rect x="44" y="150" width="8" height="62" fill="#8a5a32"/><g fill="#2c8a3a"><ellipse cx="48" cy="148" rx="22" ry="7"/><ellipse cx="48" cy="148" rx="7" ry="20"/><ellipse cx="36" cy="142" rx="16" ry="6" transform="rotate(-30 36 142)"/><ellipse cx="60" cy="142" rx="16" ry="6" transform="rotate(30 60 142)"/></g></g>';
+      s+='<g><rect x="270" y="160" width="8" height="52" fill="#8a5a32"/><g fill="#2c8a3a"><ellipse cx="274" cy="158" rx="20" ry="6"/><ellipse cx="274" cy="158" rx="6" ry="18"/></g></g>';
+      s+='<rect y="212" width="320" height="28" fill="#e9d39a"/>';
+    } else if(place==="sydney"){
+      s+='<defs><linearGradient id="ssky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe3ff"/><stop offset="1" stop-color="#7fb0e0"/></linearGradient></defs><rect width="320" height="240" fill="url(#ssky)"/>';
+      s+='<path d="M20 184 Q160 92 300 184" fill="none" stroke="#8a98ab" stroke-width="9"/>';
+      s+='<g stroke="#8a98ab" stroke-width="4">'; for(var bx=40;bx<=300;bx+=40){ var ht=Math.max(0,(1-Math.abs(bx-160)/140)*88); s+='<line x1="'+bx+'" y1="184" x2="'+bx+'" y2="'+(184-ht).toFixed(0)+'"/>'; } s+='</g>';
+      s+='<g fill="#f3f4ff" stroke="#cdd6e6" stroke-width="1.5"><path d="M118 186 Q130 150 148 186 Z"/><path d="M140 186 Q156 142 176 186 Z"/><path d="M166 186 Q180 152 198 186 Z"/></g>';
+      s+='<rect y="184" width="320" height="56" fill="#4f87c4"/>';
+    } else {
+      s+='<defs><linearGradient id="rsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd0a0"/><stop offset="1" stop-color="#ff9ab0"/></linearGradient></defs><rect width="320" height="240" fill="url(#rsky)"/>';
+      s+='<circle cx="60" cy="54" r="26" fill="#ffe08a"/>';
+      s+='<path d="M0 200 Q70 120 150 200 Z" fill="#5f8a5a"/><path d="M180 200 Q240 110 300 200 Z" fill="#6f9a66"/>';
+      s+='<g fill="#e6ecf2"><rect x="238" y="92" width="4" height="26"/><rect x="222" y="100" width="36" height="3"/><circle cx="240" cy="90" r="4"/></g>';
+      s+='<rect y="200" width="320" height="40" fill="#3aa3c4"/><rect y="200" width="320" height="10" fill="#f0e0a0"/>';
+    }
+    s+='<g fill="#ffffff" opacity="0.85"><ellipse cx="82" cy="40" rx="22" ry="9"/><ellipse cx="98" cy="36" rx="16" ry="8"/></g>';
+    s+='</svg>'; return s;
+  }
+  function buildTravel(item){
+    var html='<div class="scene-bg">'+travelBG(item.place)+'</div>';
+    html+='<div class="plane">'+planeSVG()+'</div>';
+    html+='<div class="scene-avatar" style="left:40%;bottom:8%;width:31%;"><div class="ava-glow"></div>'+avatarSVG(P.avatar)+'</div>';
+    html+='<div class="scene-friend">'+starFriendSVG()+'</div>';
+    html+='<div class="marquee"><div class="nm">★ '+P.name.toUpperCase()+' ★</div></div>';
+    var sp=[[18,44],[80,38],[28,64],[72,58]]; for(var j=0;j<sp.length;j++){ html+='<div class="spark" style="left:'+sp[j][0]+'%;top:'+sp[j][1]+'%;animation-delay:'+(j*0.3)+'s;">✨</div>'; }
+    return html;
+  }
   function buildSceneHTML(item){
     var t=item.scene;
+    if(t==="travel") return buildTravel(item);
     var concert=(t==="ticket"||t==="backstage"||t==="headline");
     var big=(t==="headline");
     var html='<div class="scene-bg">'+sceneSVG(t)+'</div>';
@@ -823,6 +900,7 @@
     else if(t==="sushi"){ title="🍣 "+nm+"'s sushi feast!"; cap="Yummy sushi at your favourite restaurant! 🥢"; }
     else if(t==="gym"){ title="📣 "+nm+" at cheer practice!"; cap="Pom-poms ready — go go go! 🤸"; }
     else if(t==="dance"){ title="🩰 "+nm+" at the dance studio!"; cap="Twirl and leap on the studio floor! 🎶"; }
+    else if(t==="travel"){ var pls={tokyo:"Tokyo, Japan",la:"Los Angeles",sydney:"Sydney, Australia",rio:"Rio de Janeiro"}; title="✈️ "+nm+" flies to "+(pls[item.place]||"the world")+"!"; cap="On tour with Taylor Swift! 🎤✈️"; }
     else { title="🎤 "+nm+" LIVE!"; cap="You're headlining your very own show! ⭐"; }
     $("sceneTitle").textContent=title; $("sceneCaption").textContent=cap; show("s-scene");
   }
@@ -1036,7 +1114,7 @@
     stepLock=false;
     var st=STEP_SEQ[stepsState.step], s=stepsState.sum, sign=stepsState.op==="add"?"+":"−";
     renderBigSum(st); $("stepFb").textContent=""; $("stepFb").style.color="";
-    if(st==="selOnes"||st==="selTens"){ $("stepPrompt").textContent=(st==="selOnes"?"👇 Tap the ONES in both numbers":"👆 Now tap the TENS in both numbers"); $("stepOpts").innerHTML=""; return; }
+    if(st==="selOnes"||st==="selTens"){ $("stepPrompt").innerHTML=(st==="selOnes"?'Tap the <span class="hl-ones">ONES</span> — the <b>right-hand</b> digit of each number 👉':'Now tap the <span class="hl-tens">TENS</span> — the <b>left-hand</b> digit of each number 👈'); $("stepOpts").className=""; $("stepOpts").innerHTML=""; return; }
     var prompt, ans, isTensVal=false;
     if(st==="ones"){ prompt="Add the ones: "+s.aO+" "+sign+" "+s.bO+" = ?"; ans=s.ones; }
     else if(st==="tens"){ prompt="Add the tens: "+s.aT+" "+sign+" "+s.bT+" = ? tens"; ans=s.tensD; }
@@ -1059,7 +1137,7 @@
       var d=document.createElement("div"); d.textContent="✓ "+line; $("working").appendChild(d);
       stepsState.step++;
       setTimeout(function(){ stepLock=false;
-        if(stepsState.step>=STEP_SEQ.length){ stepsState.idx++; stepsState.earned+=5; P.coins+=5; refreshCoins(); saveStore(); coinPop("+5 🪙"); if(stepsState.idx>=stepsState.total) endSteps(); else { speak(pick(["Great!","Well done!","Nice one!"])); nextSum(); } }
+        if(stepsState.step>=STEP_SEQ.length){ stepsState.idx++; stepsState.earned+=15; P.coins+=15; refreshCoins(); saveStore(); coinPop("+15 🪙"); soundStreak(); speak(pick(["Brilliant!","Well done!","You did the whole sum!"])); showSumDone(); }
         else renderStep();
       }, 540);
     } else {
@@ -1068,6 +1146,17 @@
       $("stepFb").textContent="Almost! It's "+stepsState.curAns; $("stepFb").style.color="#c0392b";
       setTimeout(function(){ stepLock=false; renderStep(); }, 1100);
     }
+  }
+  function showSumDone(){
+    var s=stepsState.sum, sign=stepsState.op==="add"?"+":"−";
+    $("stepPrompt").innerHTML='<span style="color:#2ecc71;font-weight:900;">'+s.a+" "+sign+" "+s.b+" = "+s.total+'</span> 🎉';
+    $("stepFb").textContent="+15 coins! Read it through, then carry on.";
+    $("stepFb").style.color="#2a8f5a";
+    var box=$("stepOpts"); box.className=""; box.innerHTML="";
+    var btn=document.createElement("button"); btn.className="btn b-pay"; btn.style.margin="0";
+    btn.textContent=(stepsState.idx>=stepsState.total)?"🎉 Finish":"Next sum ➡";
+    btn.onclick=function(){ if(stepsState.idx>=stepsState.total) endSteps(); else nextSum(); };
+    box.appendChild(btn);
   }
   function endSteps(){ soundStreak(); speak("Brilliant work!"); toast("🎉 Done! You earned "+stepsState.earned+" coins"); show("s-rounds"); }
 
